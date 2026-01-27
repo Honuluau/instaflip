@@ -8,6 +8,7 @@ body {
     --background-hover: #f0f0f0;
     --border: oklch(0.922, 0, 0);
     --green: #00e793;
+    -webkit-user-select: none;
 
     padding: 0px;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
@@ -15,6 +16,7 @@ body {
 }
 
 button {
+    --wails-draggable: no-drag;
     background-color: var(--background);
     border: 1px solid var(--border);
     padding: 10px;
