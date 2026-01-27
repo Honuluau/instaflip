@@ -1,5 +1,95 @@
-:root {
-    --background: oklch(1, 0, 0);
+body {
+    margin: 0;
+}
 
-    font-family: monospace;
+:root {
+    --radius: 0.625rem;
+    --background: oklch(1, 0, 0);
+    --background-hover: #f0f0f0;
+    --border: oklch(0.922, 0, 0);
+    --green: #00e793;
+
+    padding: 0px;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+}
+
+button {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: var(--radius);
+
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--background-hover);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.bottom {
+    align-items: flex-end;
+}
+
+.badge {
+    background-color: var(--green);
+    border-radius: var(--radius);
+    padding: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-left: 0.25rem;
+}
+
+.badge p {
+    font-size: 0.75rem;
+}
+
+.m0 {
+    margin: 0;
+}
+
+.sidebar {
+    position: absolute;
+    border-right: 1px solid #cccccc;
+    padding: 0.5rem;
+    height: 100vw;
+    top: 0;
+    z-index: 20;
+    padding-top: 2.5rem;
+}
+
+.sidebar button {
+    margin-bottom: 0.25rem;
+}
+
+.topbar {
+    --wails-draggable: drag;
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
+}
+
+.topbar div {
+    margin: 0.25rem;
+}
+
+.pageContainer {
+    margin-left: 5rem;
+    justify-content: center;
 }
