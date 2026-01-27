@@ -11,26 +11,26 @@ function App() {
         switch(currentPage) {
             default: 
             return (
-                <>
+                <div className="flex1">
                     <Header />
                     <p>Hello, world!</p>
                     <p>HELP</p>
-                </>
+                </div>
             )
         }
     }
 
     return (
-        <div className="flex-col" id="root">
-            <Topbar />
-            <div className="flex-row">
+            <div className="flex-row" id="root">
                 <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
 
-                <div className="pageContainer">
-                    {renderPage()}
+                <div className="flex1 flex-col">
+                    <Topbar />
+                    <div className="pageContainer">
+                        {renderPage()}
+                    </div>
                 </div>
             </div>
-        </div>
     )
 }
 

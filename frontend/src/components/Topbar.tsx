@@ -1,4 +1,4 @@
-import { Expand, Minus, X } from "lucide-react";
+import { Maximize, Minus, X } from "lucide-react";
 
 const iconSize = 16;
 
@@ -13,7 +13,7 @@ export function Topbar() {
 
                 {/*Expand*/}
                 <button>
-                    <Expand size={iconSize}/>
+                    <Maximize size={iconSize}/>
                 </button>
 
                 {/*Close*/}

@@ -65,31 +65,36 @@ button:hover {
 }
 
 .sidebar {
-    position: absolute;
     border-right: 1px solid #cccccc;
     padding: 0.5rem;
     height: 100vw;
-    top: 0;
-    z-index: 20;
-    padding-top: 2.5rem;
+    padding-top: 3rem;
 }
 
 .sidebar button {
     margin-bottom: 0.25rem;
 }
 
+.flex1 {
+    flex: 1;
+}
+
 .topbar {
     --wails-draggable: drag;
     display: flex;
     justify-content: flex-end;
-    width: 100vw;
+    align-items: center;
+    width: 100%;
+    flex: 1;
 }
 
 .topbar div {
     margin: 0.25rem;
+    margin-left: auto;
 }
 
 .pageContainer {
-    margin-left: 5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
     justify-content: center;
 }
