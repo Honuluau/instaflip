@@ -3,18 +3,28 @@ import './App.css';
 import { PageType, Sidebar } from './components/Sidebar';
 import { Topbar } from './components/Topbar';
 import { Header } from './components/Header';
+import { SettingsPage } from './pages/SettingsPage';
+import StatisticsPage from './pages/StatisticsPage';
+import { DebugPage } from './pages/DebugPage';
+
+export const version = "v1.0_dev"
 
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>("main");
 
     const renderPage = () => {
         switch(currentPage) {
+            case "settings":
+                return <SettingsPage />
+            case "statistics":
+                return <StatisticsPage />
+            case "debug":
+                return <DebugPage />
             default: 
             return (
                 <div className="flex1">
                     <Header />
-                    <p>Hello, world!</p>
-                    <p>HELP</p>
+                    <h3>Home Page</h3>
                 </div>
             )
         }
