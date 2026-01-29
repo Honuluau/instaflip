@@ -52,7 +52,6 @@ button:hover {
 .flex-col {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 
 .flex-row {
@@ -420,4 +419,48 @@ button.ineligible {
     width: 100%;
     align-items: center;
     justify-content: center;
+}
+
+.justify-start {
+    justify-content: start;
+}
+
+.semester-date-settings {
+    display: inline-flex;
+    gap: 3em;
+    margin-bottom: 1.5rem;
+}
+
+.semester-date-settings h4 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+
+    font-weight: 500;
+    font-size: 16px;
+}
+
+button.date-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-shadow: 0px 0px 2px var(--border);
+    
+    font-family: inherit; 
+    font-weight: 500;
+    font-size: var(--sb-font-size);
+}
+
+h1.page-header {
+    margin-bottom: 1cm;
+}
+
+.no-margin {
+    margin: 0;
 }
