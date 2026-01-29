@@ -6,7 +6,7 @@ import { Header } from './components/Header';
 import { SettingsPage } from './pages/SettingsPage';
 import StatisticsPage from './pages/StatisticsPage';
 import { DebugPage } from './pages/DebugPage';
-import { OctagonAlert, User } from 'lucide-react';
+import { Check, OctagonAlert, User } from 'lucide-react';
 
 export const version = "v1.0_dev"
 
@@ -36,9 +36,17 @@ function App() {
                     </div>
                     {
                         <div className='container'>
-                            <div className='error-badge'>
+                            <div className='banner ineligible'>
                                 <OctagonAlert size={20}/>
                                 <span>This user has reached the maximum amount of flips for the semester.</span>
+                            </div>
+                        </div>
+                    }
+                    {
+                        <div className='container'>
+                            <div className='banner eligible'>
+                                <Check size={20}/>
+                                <span>This user has 2 available flips.</span>
                             </div>
                         </div>
                     }

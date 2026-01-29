@@ -221,14 +221,10 @@ input::placeholder {
     flex: 1;
 }
 
-.error-badge {
+.banner {
     border-radius: var(--radius);
     display: inline-flex;
     flex: 1;
-    background-color: rgb(246, 47, 47);
-    border: 1px solid rgb(255, 0, 0);
-    box-shadow: 0px 0px 3px rgba(246, 47, 47);
-    color: rgba(74, 8, 8, 0.9);
     padding: 1rem;
     align-items: center;
     justify-content: left;
@@ -237,6 +233,25 @@ input::placeholder {
     font-size: 16px;
 }
 
-.error-badge span {
+.banner span {
     margin-left: 10px;
+}
+
+.ineligible {
+    --error: #f2666b;
+    --error2: rgba(92, 18, 18, 0.9);
+
+    background-color: var(--error);
+    border: 1px solid var(--error2);
+    box-shadow: 0px 0px 3px var(--error);
+    color: var(--error2);
+}
+
+.eligible {
+    --success: #cbf99a;
+
+    background-color: var(--success);
+    border: 1px solid rgb(0, 255, 0);
+    box-shadow: 0px 0px 3px var(--success);
+    color: rgb(12, 77, 29)
 }
