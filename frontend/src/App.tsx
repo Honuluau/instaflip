@@ -32,7 +32,7 @@ function App() {
                         <Header />
                         <div className='container'>
                             <div className='form-div'>
-                                <h3>Flip Patron</h3>
+                                <h2>Flip Patron</h2>
                                 <div className='flex input-button'>
                                     <input type="text" placeholder='Eagle Id'></input>
                                     <button className='accent check-btn'><User size={16} /><span>Check</span></button>
