@@ -6,7 +6,7 @@ import { Header } from './components/Header';
 import { SettingsPage } from './pages/SettingsPage';
 import StatisticsPage from './pages/StatisticsPage';
 import { DebugPage } from './pages/DebugPage';
-import { Check, Cross, EllipsisVertical, OctagonAlert, Repeat, User, X } from 'lucide-react';
+import { Check, Cross, EllipsisVertical, EyeOff, OctagonAlert, Repeat, User, X } from 'lucide-react';
 import { InfoPage } from './pages/InfoPage';
 import { FlipInstance } from './components/FlipInstance';
 import { CanFlipBanner, MaximumFlipsReachedBanner } from './components/Banners';
@@ -40,11 +40,23 @@ function App() {
                             </div>
                         </div>
                         {
-                            <MaximumFlipsReachedBanner />
+                            <CanFlipBanner />
                         }
                         {
                             <div className='container flex-col'>
-                                <h2>Current Semester</h2>
+                                <div className='semesters-header'>
+                                    <h2>Current Semester</h2>
+                                    <div className='semesters-actions'>
+                                        <div className='select-all'>
+                                            <input type='checkbox' />
+                                            <span>Select All</span>
+                                        </div>
+                                        <button className='ineligible'>
+                                            <EyeOff size={16} />
+                                            <span>Hide Selected</span>
+                                        </button>
+                                    </div>
+                                </div>
                                 <div className='semesters'>
                                     <FlipInstance />
                                     <FlipInstance />

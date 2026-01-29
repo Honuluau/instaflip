@@ -383,3 +383,33 @@ input::placeholder {
     width: 30px;
     height: 30px;
 }
+
+.semesters-header{
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+
+    white-space: nowrap;
+    margin-right: 1rem;
+}
+
+.semesters-actions {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 1rem;
+
+    font-weight: var(--sb-font-weight);
+    font-size: var(--sb-font-size);
+}
+
+.select-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: left;
+}
+
+button.ineligible {
+    display: inline-flex;
+    gap: 0.5rem;
+}
