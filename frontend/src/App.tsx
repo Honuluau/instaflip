@@ -46,20 +46,9 @@ function App() {
                             <div className='container flex-col'>
                                 <div className='semesters-header'>
                                     <h2>Current Semester</h2>
-                                    <div className='semesters-actions'>
-                                        <div className='select-all'>
-                                            <input type='checkbox' />
-                                            <span>Select All</span>
-                                        </div>
-                                        <button className='ineligible'>
-                                            <EyeOff size={16} />
-                                            <span>Hide Selected</span>
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className='semesters'>
-                                    <FlipInstance />
-                                    <FlipInstance />
+                                    <div className='wide-center'><span>No recorded flips this semester.</span></div>
                                 </div>
                             </div>
                         }
@@ -75,6 +64,17 @@ function App() {
                                     <X size={20} />
                                     <span>Cancel</span>
                                 </button>
+                            </div>
+                        }
+                        {
+                            <div className='container flex-col'>
+                                <div className='semesters-header'>
+                                    <h2>Other</h2>
+                                </div>
+                                <div className='semesters'>
+                                    <FlipInstance id={1} date='January 29th, 2026 at 12:24 PM'/>
+                                    <FlipInstance id={2} date='March 11th, 2026 at 6:88 PM' />
+                                </div>
                             </div>
                         }
                     </div>

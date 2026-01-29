@@ -1,17 +1,21 @@
 import { EllipsisVertical } from "lucide-react";
 
-export function FlipInstance() {
+interface FlipInstanceProps {
+    id: number;
+    date: string;
+}
+
+export function FlipInstance({id, date}: FlipInstanceProps) {
     return (
         <div className='flip-instance'>
             <div className='selection'>
-                <input type='checkbox' />
-                <span className='id'>1</span>
+                <span className='id'>{id}</span>
             </div>
             <div className='information'>
-                <span className='date'>2026-01-29 11:25 AM</span>
+                <span className='date'>{date}</span>
             </div>
             <div className='action'>
-                <button><EllipsisVertical size={16} /></button>
+                <button><EllipsisVertical size={16}/></button>
             </div>
         </div>
     )

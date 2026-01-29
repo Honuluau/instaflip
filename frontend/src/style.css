@@ -413,3 +413,10 @@ button.ineligible {
     display: inline-flex;
     gap: 0.5rem;
 }
+
+.wide-center {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
