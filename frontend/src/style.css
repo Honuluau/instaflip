@@ -109,7 +109,10 @@ h1 {
     display: flex;
     flex: 1;
     justify-content: center;
-    margin: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .no-top-margin {
@@ -216,4 +219,24 @@ input::placeholder {
 .input-button {
     display: inline-flex;
     flex: 1;
+}
+
+.error-badge {
+    border-radius: var(--radius);
+    display: inline-flex;
+    flex: 1;
+    background-color: rgb(246, 47, 47);
+    border: 1px solid rgb(255, 0, 0);
+    box-shadow: 0px 0px 3px rgba(246, 47, 47);
+    color: rgba(74, 8, 8, 0.9);
+    padding: 1rem;
+    align-items: center;
+    justify-content: left;
+
+    font-weight: var(--sb-font-weight);
+    font-size: 16px;
+}
+
+.error-badge span {
+    margin-left: 10px;
 }
