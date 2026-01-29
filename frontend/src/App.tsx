@@ -6,7 +6,7 @@ import { Header } from './components/Header';
 import { SettingsPage } from './pages/SettingsPage';
 import StatisticsPage from './pages/StatisticsPage';
 import { DebugPage } from './pages/DebugPage';
-import { Check, OctagonAlert, User } from 'lucide-react';
+import { Check, Cross, OctagonAlert, Repeat, User, X } from 'lucide-react';
 
 export const version = "v1.0_dev"
 
@@ -48,6 +48,20 @@ function App() {
                                 <Check size={20}/>
                                 <span>This user has 2 available flips.</span>
                             </div>
+                        </div>
+                    }
+                    {
+                        <div className='container button-row'>
+                            <div className='colorful-card'>
+                                <button className='flip-btn'>
+                                    <Repeat size={20}/>
+                                    <span>Flip Patron</span>
+                                </button>
+                            </div>
+                            <button className='flip-btn cancel'>
+                                <X size={20}/>
+                                <span>Cancel</span>
+                            </button>
                         </div>
                     }
                 </div>
