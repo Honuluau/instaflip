@@ -3,8 +3,8 @@ body {
 }
 
 :root {
-    --accent1: oklch(0.4559 0.1973 261.75);
-    --accent2: oklch(58.217% 0.18922 258.264);
+    --accent1: rgb(8, 74, 194);
+    --accent2: rgb(37, 118, 232);
 
     --radius: 0.625rem;
     --background: oklch(1, 0, 0);
@@ -334,4 +334,52 @@ input::placeholder {
 .button-row {
     gap: 16px;
     justify-content: right;
+}
+
+.semesters {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.flip-instance {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: var(--radius);
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    gap: 16px;
+
+    font-weight: var(--sb-font-weight);
+    font-size: var(--sb-font-size);
+
+    transition: border-color 0.1s ease;
+    transition: background-color 0.1s ease;
+}
+
+
+.flip-instance:has(input:checked) {
+    border: 1px solid var(--accent1);
+    background-color: rgba(8, 74, 194, 0.2);
+}
+
+.flip-instance .selection {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.flip-instance button {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: 0px 0px 2px var(--border);
+    padding: 4px;
+    width: 30px;
+    height: 30px;
 }
