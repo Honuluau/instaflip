@@ -1,5 +1,9 @@
 import { Check, OctagonAlert } from "lucide-react";
 
+interface CanFlipProps {
+    flips: number
+}
+
 export function MaximumFlipsReachedBanner() {
     return (
         <div className='container'>
@@ -11,12 +15,12 @@ export function MaximumFlipsReachedBanner() {
     )
 }
 
-export function CanFlipBanner() {
+export function CanFlipBanner({flips}: CanFlipProps) {
     return (
         <div className='container'>
             <div className='banner eligible'>
                 <Check size={20} />
-                <span>This patron has 2 available flips.</span>
+                <span>This patron has {String(flips)} available flips.</span>
             </div>
         </div>
     )

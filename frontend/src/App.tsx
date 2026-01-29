@@ -40,7 +40,7 @@ function App() {
                             </div>
                         </div>
                         {
-                            <CanFlipBanner />
+                            <CanFlipBanner flips={2}/>
                         }
                         {
                             <div className='container flex-col'>
@@ -48,7 +48,7 @@ function App() {
                                     <h2>Current Semester</h2>
                                 </div>
                                 <div className='semesters'>
-                                    <div className='wide-center'><span>No recorded flips this semester.</span></div>
+                                    <div className='wide-center'><span>No recorded flips from this semester.</span></div>
                                 </div>
                             </div>
                         }
