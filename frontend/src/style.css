@@ -3,25 +3,40 @@ body {
 }
 
 :root {
+    --accent1: oklch(0.4559 0.1973 261.75);
+    --accent2: oklch(58.217% 0.18922 258.264);
+
     --radius: 0.625rem;
     --background: oklch(1, 0, 0);
     --background-hover: #f0f0f0;
-    --border: oklch(0.922, 0, 0);
+    --border: #cccccc;
     --green: #00e793;
     -webkit-user-select: none;
+
+    --sb-font-weight: 500;
+    --sb-font-size: 1rem;
 
     padding: 0px;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
     font-size: 0.8rem;
 }
 
+.root {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
 button {
     --wails-draggable: no-drag;
     background-color: var(--background);
-    border: 1px solid var(--border);
+    border: 1px solid #FFFFFF;
     padding: 10px;
     cursor: pointer;
     border-radius: var(--radius);
+
+    font-weight: var(--sb-font-weight);
+    font-size: var(--sb-font-size);
 
     transition: background-color 0.2s ease;
 }
@@ -51,26 +66,54 @@ button:hover {
 }
 
 .badge {
-    background-color: var(--green);
+    background-color: var(--accent1);
     border-radius: var(--radius);
+    color: #FFFFFF;
     padding: 0.25rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    margin-left: 0.25rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    margin-left: 0.3rem;
 }
 
 .badge p {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .m0 {
     margin: 0;
 }
 
+.ma {
+    margin: auto;
+}
+
+.header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+}
+
+.header h1{
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 2rem;
+}
+
 .sidebar {
-    border-right: 1px solid #cccccc;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
     padding: 0.5rem;
-    height: 100vw;
+    height: 100%;
     padding-top: 3rem;
 }
 
@@ -88,7 +131,6 @@ button:hover {
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    flex: 1;
 }
 
 .topbar div {
@@ -97,7 +139,73 @@ button:hover {
 }
 
 .pageContainer {
-    margin-left: 2rem;
-    margin-right: 2rem;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.accent {
+    background-color: var(--accent1);
+    color: #FFFFFF;
+}
+
+input {
+    padding: 10px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 3px var(--border);
+    outline: none;
+    width: 100%;
+
+    font-weight: var(--sb-font-weight);
+    font-size: var(--sb-font-size);
+}
+
+input::content {
+    font-weight: var(--sb-font-weight);
+    font-size: var(--sb-font-size);
+}
+
+input::placeholder {
+    color: var(--border);
+    font-weight: var(--sb-font-weight);
+    font-size: var(--sb-font-size);
+}
+
+.check-btn {
+    display: inline-flex;
+    margin-left: 4px;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.check-btn span {
+    padding-left: 4px;
+}
+
+.check-btn:hover {
+    background-color: var(--accent2);
+}
+
+.form-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.form-div p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    font-weight: var(--sb-font-weight);
+    font-size: var(--sb-font-size);
+}
+
+.input-button {
+    display: inline-flex;
+    flex: 1;
 }

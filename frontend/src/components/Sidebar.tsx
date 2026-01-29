@@ -11,7 +11,7 @@ const iconSize = 20;
 
 export function Sidebar({ currentPage, onPageChange}: SidebarProps) {
     return (
-        <div className="flex-col sidebar">
+        <div className="sidebar">
             {/*Home Button*/}
             <button
                 onClick={() => onPageChange("main")}

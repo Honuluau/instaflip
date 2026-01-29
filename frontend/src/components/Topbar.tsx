@@ -19,7 +19,7 @@ export function Topbar() {
 
     return (
         <div className="topbar">
-            <div className="flex">
+            <div>
                 {/*Minimize*/}
                 <button
                 onClick={() => minimise}
