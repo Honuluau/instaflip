@@ -11,6 +11,12 @@ export function HomePage() {
         console.log(`Checking ${eagleId}.`)
     }
 
+    const handleKeyDown = (key: string) => {
+        if (key === 'Enter') {
+            checkPatron();
+        }
+    }
+
     return (
         <div className="pageContainer">
             <Header />
@@ -18,7 +24,12 @@ export function HomePage() {
                 <div className='form-div'>
                     <h2>Flip Patron</h2>
                     <div className='flex input-button'>
-                        <input type="text" placeholder='Eagle Id' onChange={(e) => setEagleId(e.target.value)}></input>
+                        <input 
+                            type="text" 
+                            placeholder='Eagle Id' 
+                            onChange={(e) => setEagleId(e.target.value)}
+                            onKeyDown={(e) => handleKeyDown(e.key)}
+                        ></input>
                         <button className='accent check-btn' onClick={checkPatron}><User size={16} /><span>Check</span></button>
                     </div>
                 </div>
