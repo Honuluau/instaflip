@@ -126,10 +126,16 @@ h1 {
     padding: 0.5rem;
     height: 100%;
     padding-top: 3rem;
+    justify-content: space-between;
 }
 
 .sidebar button {
     margin-bottom: 0.25rem;
+}
+
+.sidebar .section {
+    display: flex;
+    flex-direction: column;
 }
 
 .flex1 {
@@ -310,7 +316,7 @@ input::placeholder {
 }
 
 .colorful-card::before {
-    filter: blur(1.5rem);
+    filter: blur(0.5rem);
     opacity: 0.5;
 }
 

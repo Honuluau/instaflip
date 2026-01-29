@@ -7,6 +7,7 @@ import { SettingsPage } from './pages/SettingsPage';
 import StatisticsPage from './pages/StatisticsPage';
 import { DebugPage } from './pages/DebugPage';
 import { Check, Cross, OctagonAlert, Repeat, User, X } from 'lucide-react';
+import { InfoPage } from './pages/InfoPage';
 
 export const version = "v1.0_dev"
 
@@ -21,6 +22,8 @@ function App() {
                 return <StatisticsPage />
             case "debug":
                 return <DebugPage />
+            case "info":
+                return <InfoPage />
             default: 
             return (
                 <div className="pageContainer">
