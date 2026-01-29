@@ -38,7 +38,7 @@ function App() {
                         <div className='container'>
                             <div className='banner ineligible'>
                                 <OctagonAlert size={20}/>
-                                <span>This user has reached the maximum amount of flips for the semester.</span>
+                                <span>This patron has reached the maximum amount of flips for the semester.</span>
                             </div>
                         </div>
                     }
@@ -46,7 +46,7 @@ function App() {
                         <div className='container'>
                             <div className='banner eligible'>
                                 <Check size={20}/>
-                                <span>This user has 2 available flips.</span>
+                                <span>This patron has 2 available flips.</span>
                             </div>
                         </div>
                     }
