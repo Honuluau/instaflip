@@ -1,7 +1,9 @@
 export default function() {
     return (
-        <div>
-            <h1>Statistics</h1>
+        <div className="flex1 flex-col">
+            <div className="container no-top-margin">
+                <h1>Statistics</h1>
+            </div>
         </div>
     )
 }

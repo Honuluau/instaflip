@@ -101,11 +101,19 @@ button:hover {
     line-height: 1;
 }
 
+h1 {
+    margin: 0;
+}
+
 .container {
     display: flex;
     flex: 1;
     justify-content: center;
     margin: 2rem;
+}
+
+.no-top-margin {
+    margin-top: 0;
 }
 
 .sidebar {
