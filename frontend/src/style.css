@@ -151,6 +151,7 @@ h1 {
 }
 
 .topbar div {
+    --wails-draggable: no-drag;
     margin: 0.25rem;
     margin-left: auto;
 }

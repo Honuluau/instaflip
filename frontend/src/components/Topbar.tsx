@@ -22,18 +22,22 @@ export function Topbar() {
             <div>
                 {/*Minimize*/}
                 <button
-                onClick={() => minimise}
+                onClick={minimise}
                 >
                     <Minus size={iconSize}/>
                 </button>
 
                 {/*Expand*/}
-                <button>
+                <button
+                onClick={toggleMaximise}
+                >
                     <Maximize size={iconSize}/>
                 </button>
 
                 {/*Close*/}
-                <button>
+                <button
+                onClick={quit}
+                >
                     <X size={iconSize}/>
                 </button>
             </div>
