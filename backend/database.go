@@ -36,11 +36,11 @@ func InitDB() error {
 
 	// Create flips table.
 	_, err = db.Exec(`
-		CREATE TABLE IF NOT EXISTS flips {
+		CREATE TABLE IF NOT EXISTS flips (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			eagle_id TEXT NOT NULL,
-			when DATETIME,
-		}
+			flip_time DATETIME
+		);
 	`)
 	if err != nil {
 		print(err.Error())
