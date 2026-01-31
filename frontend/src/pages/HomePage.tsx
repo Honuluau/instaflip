@@ -4,6 +4,8 @@ import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
 import { useState } from "react";
 
+import { FlipPatronDB } from "../../wailsjs/go/main/App";
+
 export function HomePage() {
     const [eagleId, setEagleId] = useState("");
 
@@ -15,6 +17,10 @@ export function HomePage() {
         if (key === 'Enter') {
             checkPatron();
         }
+    }
+
+    const flipPatron = () => {
+        FlipPatronDB(eagleId)
     }
 
     return (
@@ -50,7 +56,7 @@ export function HomePage() {
             {
                 <div className='container button-row'>
                     <div className='colorful-card'>
-                        <button className='flip-btn'>
+                        <button className='flip-btn' onClick={flipPatron}>
                             <Repeat size={20} />
                             <span>Flip Patron</span>
                         </button>

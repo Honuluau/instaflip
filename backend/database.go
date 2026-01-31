@@ -4,9 +4,16 @@ import (
 	"database/sql"
 	"os"
 	"path/filepath"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 )
+
+type FlipDB struct {
+	ID       int64     `json:id`
+	EagleID  string    `json:eagle_id`
+	FlipTime time.Time `json:flip_time`
+}
 
 var db *sql.DB
 
@@ -55,4 +62,19 @@ func CloseDB() {
 	if db != nil {
 		db.Close()
 	}
+}
+
+func FlipPatron(eagleID string) error {
+	if db == nil {
+		if err := InitDB(); err != nil {
+			return nil
+		}
+	}
+
+	_, err := db.Exec(`
+		INSERT INTO flips (eagle_id, flip_time)
+		VALUES (?, ?)
+	`, eagleID, time.Now())
+
+	return err
 }
