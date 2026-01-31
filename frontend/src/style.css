@@ -464,3 +464,7 @@ h1.page-header {
 .no-margin {
     margin: 0;
 }
+
+.close-btn:hover {
+    background-color: #e82930;
+}

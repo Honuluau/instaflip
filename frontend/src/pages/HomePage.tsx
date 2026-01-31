@@ -15,6 +15,7 @@ export function HomePage() {
     const checkPatron = async () => {
         try {
             const _flips = await CheckFlipsDB(eagleId)
+            setChecked(true)
 
             if (_flips === null) {
                 setFlips([])
@@ -22,7 +23,6 @@ export function HomePage() {
             }
 
             setFlips(_flips)
-            setChecked(true)
         } catch (err) {
             console.error(`Failed to check flips for patron ${eagleId}. Error:`, err)
             setChecked(false)
@@ -35,8 +35,14 @@ export function HomePage() {
         }
     }
 
+    const cancelFlip = () => {
+        setEagleId("");
+        setChecked(false);
+    }
+
     const flipPatron = () => {
         FlipPatronDB(eagleId)
+        cancelFlip()
     }
 
     return (
@@ -46,10 +52,11 @@ export function HomePage() {
                 <div className='form-div'>
                     <h2>Flip Patron</h2>
                     <div className='flex input-button'>
-                        <input 
-                            type="text" 
-                            placeholder='Eagle Id' 
+                        <input
+                            type="text"
+                            placeholder='Eagle Id'
                             onChange={(e) => setEagleId(e.target.value)}
+                            value={eagleId}
                             onKeyDown={(e) => handleKeyDown(e.key)}
                         ></input>
                         <button className='accent check-btn' onClick={checkPatron}><User size={16} /><span>Check</span></button>
@@ -58,35 +65,43 @@ export function HomePage() {
             </div>
             {checked && (
                 flips.length < 2 ? (
-                    <CanFlipBanner flips={2-flips.length} />
+                    <>
+                        <CanFlipBanner flips={2 - flips.length} />
+                    </>
                 ) : (
                     <MaximumFlipsReachedBanner />
                 )
             )}
-            {
-                <div className='container flex-col'>
-                    <div className='semesters-header'>
-                        <h2>Current Semester</h2>
+            {checked && (
+                <>
+                    <div className='container flex-col'>
+                        <div className='semesters-header'>
+                            <h2>Current Semester</h2>
+                        </div>
+                        <div className='semesters'>
+                            {
+
+                            }
+                            <div className='wide-center'><span>No recorded flips from this semester.</span></div>
+                        </div>
                     </div>
-                    <div className='semesters'>
-                        <div className='wide-center'><span>No recorded flips from this semester.</span></div>
-                    </div>
-                </div>
-            }
-            {
-                <div className='container button-row'>
-                    <div className='colorful-card'>
-                        <button className='flip-btn' onClick={flipPatron}>
-                            <Repeat size={20} />
-                            <span>Flip Patron</span>
+
+                    <div className='container button-row'>
+                        {flips.length < 2 && (
+                            <div className='colorful-card'>
+                                <button className='flip-btn' onClick={flipPatron}>
+                                    <Repeat size={20} />
+                                    <span>Flip Patron</span>
+                                </button>
+                            </div>
+                        )}
+                        <button className='flip-btn cancel' onClick={cancelFlip}>
+                            <X size={20} />
+                            <span>Cancel</span>
                         </button>
                     </div>
-                    <button className='flip-btn cancel'>
-                        <X size={20} />
-                        <span>Cancel</span>
-                    </button>
-                </div>
-            }
+                </>
+            )}
             {
                 <div className='container flex-col'>
                     <div className='semesters-header'>
