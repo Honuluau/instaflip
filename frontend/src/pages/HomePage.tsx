@@ -100,19 +100,18 @@ export function HomePage() {
                             <span>Cancel</span>
                         </button>
                     </div>
+
+                    <div className='container flex-col'>
+                        <div className='semesters-header'>
+                            <h2>Other</h2>
+                        </div>
+                        <div className='semesters'>
+                            <FlipInstance id={1} date='January 29th, 2026 at 12:24 PM' />
+                            <FlipInstance id={2} date='March 11th, 2026 at 6:88 PM' />
+                        </div>
+                    </div>
                 </>
             )}
-            {
-                <div className='container flex-col'>
-                    <div className='semesters-header'>
-                        <h2>Other</h2>
-                    </div>
-                    <div className='semesters'>
-                        <FlipInstance id={1} date='January 29th, 2026 at 12:24 PM' />
-                        <FlipInstance id={2} date='March 11th, 2026 at 6:88 PM' />
-                    </div>
-                </div>
-            }
         </div>
     )
 }
