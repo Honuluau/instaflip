@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"instaflip/backend"
 )
 
 // App struct
@@ -19,6 +20,9 @@ func NewApp() *App {
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+
+	// Init DB
+	backend.InitDB()
 }
 
 // Greet returns a greeting for the given name
