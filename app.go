@@ -34,3 +34,8 @@ func (a *App) Greet(name string) string {
 func (a *App) FlipPatronDB(eagle_id string) error {
 	return backend.FlipPatron(eagle_id)
 }
+
+// Check Patron for Flips
+func (a *App) CheckFlipsDB(eagle_id string) (flips []backend.FlipRowItem, err error) {
+	return backend.CheckFlips(eagle_id)
+}

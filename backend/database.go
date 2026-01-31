@@ -2,6 +2,7 @@ package backend
 
 import (
 	"database/sql"
+	"fmt"
 	"os"
 	"path/filepath"
 	"time"
@@ -9,10 +10,16 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-type FlipDB struct {
-	ID       int64     `json:id`
-	EagleID  string    `json:eagle_id`
-	FlipTime time.Time `json:flip_time`
+type FlipRow struct {
+	ID       int64     `"json:id"`
+	EagleID  string    `"json:eagle_id"`
+	FlipTime time.Time `"json:flip_time"`
+}
+
+type FlipRowItem struct {
+	ID       int64  `"json:id"`
+	EagleID  string `"json:eagle_id"`
+	FlipTime string `"json:flip_time"`
 }
 
 var db *sql.DB
@@ -64,6 +71,7 @@ func CloseDB() {
 	}
 }
 
+// Flip patron by adding a flip instance to the database.
 func FlipPatron(eagleID string) error {
 	if db == nil {
 		if err := InitDB(); err != nil {
@@ -77,4 +85,39 @@ func FlipPatron(eagleID string) error {
 	`, eagleID, time.Now())
 
 	return err
+}
+
+// Return all flips with given eagle id.
+func CheckFlips(eagleID string) (flips []FlipRowItem, err error) {
+	if db == nil {
+		if err := InitDB(); err != nil {
+			return nil, err
+		}
+	}
+
+	rows, err := db.Query(`
+		SELECT *
+		FROM flips
+		WHERE eagle_id = ?
+	`, eagleID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var flip FlipRowItem
+		var flipTime time.Time
+
+		if err := rows.Scan(&flip.ID, &flip.EagleID, &flipTime); err != nil {
+			continue
+		}
+		flip.FlipTime = flipTime.Format("2006-01-02 15:04")
+
+		flips = append(flips, flip)
+	}
+
+	fmt.Println("Flips:", flips)
+
+	return flips, err
 }

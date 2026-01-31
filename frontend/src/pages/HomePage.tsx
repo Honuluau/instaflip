@@ -4,13 +4,13 @@ import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
 import { useState } from "react";
 
-import { FlipPatronDB } from "../../wailsjs/go/main/App";
+import { CheckFlipsDB, FlipPatronDB } from "../../wailsjs/go/main/App";
 
 export function HomePage() {
     const [eagleId, setEagleId] = useState("");
 
     const checkPatron = () => {
-        console.log(`Checking ${eagleId}.`)
+        console.log(`Checking ${CheckFlipsDB(eagleId)}.`)
     }
 
     const handleKeyDown = (key: string) => {
