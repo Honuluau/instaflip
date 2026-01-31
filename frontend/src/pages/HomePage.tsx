@@ -1,16 +1,32 @@
 import { Repeat, User, X } from "lucide-react";
-import { CanFlipBanner } from "../components/Banners";
+import { CanFlipBanner, MaximumFlipsReachedBanner } from "../components/Banners";
 import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
 import { useState } from "react";
 
 import { CheckFlipsDB, FlipPatronDB } from "../../wailsjs/go/main/App";
+import { backend } from "../../wailsjs/go/models";
 
 export function HomePage() {
     const [eagleId, setEagleId] = useState("");
+    const [flips, setFlips] = useState<backend.FlipRowItem[]>([]);
+    const [checked, setChecked] = useState(Boolean);
 
-    const checkPatron = () => {
-        console.log(`Checking ${CheckFlipsDB(eagleId)}.`)
+    const checkPatron = async () => {
+        try {
+            const _flips = await CheckFlipsDB(eagleId)
+
+            if (_flips === null) {
+                setFlips([])
+                return
+            }
+
+            setFlips(_flips)
+            setChecked(true)
+        } catch (err) {
+            console.error(`Failed to check flips for patron ${eagleId}. Error:`, err)
+            setChecked(false)
+        }
     }
 
     const handleKeyDown = (key: string) => {
@@ -40,9 +56,13 @@ export function HomePage() {
                     </div>
                 </div>
             </div>
-            {
-                <CanFlipBanner flips={2} />
-            }
+            {checked && (
+                flips.length < 2 ? (
+                    <CanFlipBanner flips={2-flips.length} />
+                ) : (
+                    <MaximumFlipsReachedBanner />
+                )
+            )}
             {
                 <div className='container flex-col'>
                     <div className='semesters-header'>
