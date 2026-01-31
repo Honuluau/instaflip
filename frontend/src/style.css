@@ -468,3 +468,81 @@ h1.page-header {
 .close-btn:hover {
     background-color: #e82930;
 }
+
+.calendar {
+    display: flex;
+    gap: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 8px;
+    box-shadow: 0px 0px 2px var(--border);
+    
+    font-family: inherit; 
+    font-weight: 500;
+    font-size: var(--sb-font-size);
+}
+
+.calendar button {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    padding: 0;
+}
+
+.calendar .primary:hover {
+    background-color: #FFFFFF;
+}
+
+.calendar .iconContainer {
+    color: var(--accent1);
+}
+
+.calendar .primary {
+    font-weight: 600;
+}
+
+.calendar .c-topbar {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.debug-log {
+    padding: 20px;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    overflow: auto;
+    background-color: #f9f9f9;
+
+    font-size: 13px;
+}
+
+.log-entry {
+    display: grid;
+    grid-template-columns: 160px 100px 1fr;
+    gap: 1rem;
+    font-family: "Google Sans Code";
+
+    margin-bottom: 0.33rem;
+}
+
+.log-entry .c1 {
+    opacity: 0.7;
+}
+
+.log-entry .info {
+    color: var(--accent1);
+}
+
+.log-entry .success {
+    color: #03cb50;
+}
+
+.log-entry .error {
+    color: #e82930;
+}
