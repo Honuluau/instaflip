@@ -43,7 +43,6 @@ func InitDB() error {
 		);
 	`)
 	if err != nil {
-		print(err.Error())
 		return err
 	}
 
