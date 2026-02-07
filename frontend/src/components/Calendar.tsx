@@ -25,14 +25,19 @@ export function Calendar({ SelectedDate, Cancel }: CalendarProps) {
 
     const getDaysInMonth = (year: number, month: number): CalendarDay[] => {
         const date = new Date(year, month, 1);
-        const startDay = date.getDay()
+        const startDay = date.getDay() // Offset from Sunday = 0, Thursday = 4
         const totalDays = new Date(year, month + 1, 0).getDate()
 
+        const previousMonthLastDay = new Date(year, month, 0).getDate()
+
         const days: CalendarDay[] = [];
-        
-        // Previous Month
-        for (let i = 0; i < startDay; i++) {
-            days.push({day : null});
+
+        // Add previous days.
+        for (let i = startDay-1; i >= 0; i--) {
+            days.push({
+                day: previousMonthLastDay-i,
+                dateString: new Date(year, month - 1, previousMonthLastDay-i).toISOString().split('T')[0]
+            })
         }
 
         // Add actual days
@@ -43,12 +48,23 @@ export function Calendar({ SelectedDate, Cancel }: CalendarProps) {
             })
         }
 
+        // Add after days.
+        const lastDayMonth = new Date(year, month+1, 0).getDay();
+        console.log(`Last Day: ${lastDayMonth}`)
+
+        for (let e = 1; e < 7-lastDayMonth; e++) {
+            days.push({
+                day: e,
+                dateString: new Date(year, month+1, e).toISOString().split('T')[0]
+            })
+        }
+
         return days
     }
 
     useEffect(() => {
         setSelectedDate(new Date(SelectedDate));
-        console.log(getDaysInMonth(2026, 1))
+        console.log(getDaysInMonth(2026, 4))
     }, [SelectedDate])
 
     return (
@@ -96,6 +112,11 @@ export function Calendar({ SelectedDate, Cancel }: CalendarProps) {
                     <CalendarButton text="THU"/>
                     <CalendarButton text="FRI"/>
                     <CalendarButton text="SAT"/>
+                </div>
+                <div className="calendar-buttons">
+                    {
+
+                    }
                 </div>
             </div>
 
