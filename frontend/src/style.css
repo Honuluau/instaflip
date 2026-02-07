@@ -471,6 +471,7 @@ h1.page-header {
 
 .calendar {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
     border-radius: var(--radius);
     border: 1px solid var(--border);
@@ -519,14 +520,14 @@ h1.page-header {
     overflow: auto;
     background-color: #f9f9f9;
 
+    font-family: "Google Sans Code";
     font-size: 13px;
 }
 
 .log-entry {
     display: grid;
-    grid-template-columns: 160px 100px 1fr;
+    grid-template-columns: 160px 80px 1fr;
     gap: 1rem;
-    font-family: "Google Sans Code";
 
     margin-bottom: 0.33rem;
 }
@@ -545,4 +546,31 @@ h1.page-header {
 
 .log-entry .error {
     color: #e82930;
+}
+
+.calendar .footer {
+    display: inline-flex;
+    justify-content: end;
+}
+
+.calendar .footer button {
+    display: flex;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: var(--accent1)
+}
+
+.calendar-week-row {
+    display: inline-flex;
+}
+
+.calendar-button {
+    padding: 2px;
+}
+
+.gray .calendar-button{
+    color: #cccccc;
+    cursor: default;
 }

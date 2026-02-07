@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { CheckFlipsDB, FlipPatronDB } from "../../wailsjs/go/main/App";
 import { backend } from "../../wailsjs/go/models";
+import { logger } from "../lib/logger";
 
 export function HomePage() {
     const [eagleId, setEagleId] = useState("");
@@ -24,6 +25,7 @@ export function HomePage() {
 
             setFlips(_flips)
         } catch (err) {
+            logger.error(`Failed to check flips for patron ${eagleId}`)
             console.error(`Failed to check flips for patron ${eagleId}. Error:`, err)
             setChecked(false)
         }
@@ -41,8 +43,15 @@ export function HomePage() {
     }
 
     const flipPatron = () => {
-        FlipPatronDB(eagleId)
-        cancelFlip()
+        try {
+            FlipPatronDB(eagleId)
+            cancelFlip()
+            
+            logger.success(`Flipped ${eagleId}.`)
+        } catch (err) {
+            logger.error(`Failed to flip ${eagleId}.`)
+            console.error(`Failed to flip ${eagleId}. Err:`, err)
+        }
     }
 
     return (

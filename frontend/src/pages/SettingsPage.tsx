@@ -12,7 +12,7 @@ export function SettingsPage() {
         setSavedSettings(tempSettings);
     }
 
-    const handleSemesterStart = (e) => {
+    const handleSemesterStart = () => {
         try {
 
         } catch (err) {
