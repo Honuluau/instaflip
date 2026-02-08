@@ -94,7 +94,7 @@ export function HomePage() {
         <>
             {outOfDate? (
                 <>
-                    <Overlay label="Semesters are out of date." text="Please change the semester settings by clicking the calendar button on the left-side of this window."/>
+                    <Overlay label="Semester Range is out of date." text="Please change the semester settings by clicking the calendar button on the left-side of this window. The semester range is derived from Academic Calendars. Academic Calendars are available through the Office of the Registrar on Georgia Southern's website."/>
                 </>
             ): (
                 <></>
