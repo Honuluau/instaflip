@@ -7,16 +7,49 @@ import { logger } from "../lib/logger";
 export function SettingsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
     const [tempSettings, setTempSettings] = useState<SettingsType>(savedSettings);
+    const [difference, setDifference] = useState<Boolean>(false);
 
     const onSave = () => {
+        // Log Differences
+        let log = "{";
+        const keys = Object.keys(savedSettings) as Array<keyof SettingsType>;
+
+        keys.forEach(key => {
+            if (savedSettings[key] !== tempSettings[key]) {
+                log += `${key}: ${tempSettings[key]}, `
+            }
+        })
+
+        log = log.slice(0, -2);
+        log += '}'
+
+        // Save Settings
+
         saveSettings(tempSettings);
         setSavedSettings(tempSettings);
-        logger.success('Saved settings.')
+        checkDifference(savedSettings);
+
+        logger.success(`Saved settings. ${log}`)
+    }
+
+    const checkDifference = (settings: SettingsType) => {
+        const keys = Object.keys(savedSettings) as Array<keyof SettingsType>;
+        let _difference = false;
+
+        keys.forEach(key => {
+            if (savedSettings[key] !== settings[key]) {
+                _difference = true;
+            }
+        })
+
+        setDifference(_difference);
     }
 
     const handleSemesterStart = (epochNum: number) => {
         try {
-            tempSettings.semesterStart = epochNum
+            const updated = {... tempSettings, semesterStart: epochNum}
+            setTempSettings(updated);
+            checkDifference(updated);
         } catch (err) {
             console.error("Error setting start of semester:", err)
             logger.error("Error setting start of semester.")
@@ -25,12 +58,18 @@ export function SettingsPage() {
 
     const handleSemesterEnd = (epochNum: number) => {
         try {
-            tempSettings.semesterEnd = epochNum
+            const updated = {... tempSettings, semesterEnd: epochNum}
+            setTempSettings(updated);
+            checkDifference(updated);
         } catch (err) {
             console.error("Error setting end of semester:", err)
             logger.error("Error setting end of semester.")
         }
     }
+
+    useEffect(() => {
+
+    }, [difference])
 
     return (
         <div className="container no-top-margin flex-col justify-start">
@@ -38,11 +77,11 @@ export function SettingsPage() {
             <div className="semester-date-settings">
                 <div>
                     <h4>Semester Start</h4>
-                    <Datebox date={new Date(savedSettings.semesterStart)} update={handleSemesterStart}/>
+                    <Datebox date={new Date(savedSettings.semesterStart)} update={handleSemesterStart} />
                 </div>
                 <div>
                     <h4>Semester End</h4>
-                    <Datebox date={new Date(savedSettings.semesterEnd)} update={handleSemesterEnd}/>
+                    <Datebox date={new Date(savedSettings.semesterEnd)} update={handleSemesterEnd} />
                 </div>
             </div>
             <div className="semester-date-settings">
@@ -52,10 +91,11 @@ export function SettingsPage() {
                 </div>
             </div>
             <div>
-                <button className="accent check-btn no-margin" onClick={onSave}>
-                    <Save size={20} />
-                    <span>Save Changes</span>
-                </button>
+                {difference ?
+                    <button className="accent check-btn no-margin" onClick={onSave}>
+                        <Save size={20} />
+                        <span>Save Changes</span>
+                    </button> : <></>}
             </div>
         </div>
     )
