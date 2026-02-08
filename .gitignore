@@ -2,3 +2,5 @@ build
 node_modules
 frontend/dist
 frontend/src/pages/InfoPage.tsx
+.github/workflows/build-windows.yml
+.DS_Store
