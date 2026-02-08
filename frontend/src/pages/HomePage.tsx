@@ -29,9 +29,21 @@ export function HomePage() {
                 return
             }
 
+            let _currentFlips: backend.FlipRowItem[] = []
+            let _otherFlips: backend.FlipRowItem[] = []
+
+            for (const flip of _flips) {
+                console.log(flip, settings.semesterStart, settings.semesterEnd)
+                if (settings.semesterStart < flip.FlipTime && flip.FlipTime < settings.semesterEnd) {
+                    _currentFlips.push(flip);
+                } else {
+                    _otherFlips.push(flip)
+                }
+            }
+
             setFlips(_flips)
-            setCurrentFlips(_flips)
-            setOtherFlips(_flips)
+            setCurrentFlips(_currentFlips)
+            setOtherFlips(_otherFlips)
         } catch (err) {
             logger.error(`Failed to check flips for patron ${eagleId}`)
             console.error(`Failed to check flips for patron ${eagleId}. Error:`, err)
@@ -130,15 +142,24 @@ export function HomePage() {
                         </button>
                     </div>
 
-                    <div className='container flex-col'>
-                        <div className='semesters-header'>
-                            <h2>Other</h2>
+                    {otherFlips.length > 0 && (
+                        <div className='container flex-col'>
+                            <div className='semesters-header'>
+                                <h2>Other</h2>
+                            </div>
+                            <div className='semesters'>
+                                {otherFlips.length == 0 ? (
+                                    <div className='wide-center'><span>No recorded flips from this semester.</span></div>
+                                ) : (
+                                    <>
+                                        {otherFlips?.map((flip: backend.FlipRowItem, i) => (
+                                            <FlipInstance key={i} id={i} date={flip.FlipTime} />
+                                        ))}
+                                    </>
+                                )}
+                            </div>
                         </div>
-                        <div className='semesters'>
-                            <FlipInstance id={1} date={1} />
-                            <FlipInstance id={2} date={1} />
-                        </div>
-                    </div>
+                    )}
                 </>
             )}
         </div>

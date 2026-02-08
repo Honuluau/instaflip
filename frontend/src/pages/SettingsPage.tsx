@@ -71,7 +71,6 @@ export function SettingsPage() {
         let flipAmount = e.target.valueAsNumber || 2
 
         try {
-            console.log(`Flip Amount Changed: ${flipAmount}`)
             const updated = {... tempSettings, maxFlips: flipAmount}
             setTempSettings(updated)
             checkDifference(updated);
