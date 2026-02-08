@@ -64,7 +64,10 @@ export function HomePage() {
                         <input
                             type="text"
                             placeholder='Eagle Id'
-                            onChange={(e) => setEagleId(e.target.value)}
+                            onChange={(e) => {
+                                setEagleId(e.target.value)
+                                setChecked(false)
+                            }}
                             value={eagleId}
                             onKeyDown={(e) => handleKeyDown(e.key)}
                         ></input>
