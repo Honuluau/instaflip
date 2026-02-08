@@ -32,11 +32,11 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
         const days: CalendarDay[] = [];
 
         // Add previous days.
-        for (let i = startDay-1; i >= 0; i--) {
+        for (let i = startDay - 1; i >= 0; i--) {
             days.push({
-                day: previousMonthLastDay-i,
+                day: previousMonthLastDay - i,
                 isCurrentMonth: false,
-                dateString: new Date(year, month - 1, previousMonthLastDay-i).toISOString().split('T')[0]
+                dateString: new Date(year, month - 1, previousMonthLastDay - i).toISOString().split('T')[0]
             })
         }
 
@@ -50,13 +50,13 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
         }
 
         // Add after days.
-        const lastDayMonth = new Date(year, month+1, 0).getDay();
+        const lastDayMonth = new Date(year, month + 1, 0).getDay();
 
-        for (let e = 1; e < 7-lastDayMonth; e++) {
+        for (let e = 1; e < 7 - lastDayMonth; e++) {
             days.push({
                 day: e,
                 isCurrentMonth: false,
-                dateString: new Date(year, month+1, e).toISOString().split('T')[0]
+                dateString: new Date(year, month + 1, e).toISOString().split('T')[0]
             })
         }
 
@@ -89,19 +89,14 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
         <div className="calendar">
             {/*Header*/}
             <div className="c-topbar">
-                <div>
-                    <button
-                        className="primary"
-                    >
-                        {selectedDate?.toLocaleString('en-us', {
-                            month: 'short',
-                            year: 'numeric'
-                        })}
-                        <div className="iconContainer">
-                            <ChevronRight size={14} />
-                        </div>
-                    </button>
-                </div>
+                <span
+                    className="primary"
+                >
+                    {selectedDate?.toLocaleString('en-us', {
+                        month: 'short',
+                        year: 'numeric'
+                    })}
+                </span>
                 <div>
                     <button
                         onClick={() => incrementDateByMonth(-1)}
@@ -124,16 +119,16 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
             <div>
                 <div className="calendar-week-row gray">
                     <CalendarButton text="SUN" />
-                    <CalendarButton text="MON"/>
-                    <CalendarButton text="TUE"/>
-                    <CalendarButton text="WED"/>
-                    <CalendarButton text="THU"/>
-                    <CalendarButton text="FRI"/>
-                    <CalendarButton text="SAT"/>
+                    <CalendarButton text="MON" />
+                    <CalendarButton text="TUE" />
+                    <CalendarButton text="WED" />
+                    <CalendarButton text="THU" />
+                    <CalendarButton text="FRI" />
+                    <CalendarButton text="SAT" />
                 </div>
                 <div className="calendar-buttons">
                     {days?.map((day: CalendarDay, d) => (
-                        <CalendarButton key={d} text={day.day.toString()} dateString={day.dateString} isCurrentMonth={day.isCurrentMonth} setDateFunction={handleSetDate}/>
+                        <CalendarButton key={d} text={day.day.toString()} dateString={day.dateString} isCurrentMonth={day.isCurrentMonth} setDateFunction={handleSetDate} />
                     ))
                     }
                 </div>
