@@ -11,6 +11,8 @@ import { logger } from "../lib/logger";
 export function HomePage() {
     const [eagleId, setEagleId] = useState("");
     const [flips, setFlips] = useState<backend.FlipRowItem[]>([]);
+    const [currentFlips, setCurrentFlips] = useState<backend.FlipRowItem[]>([]);
+    const [otherFlips, setOtherFlips] = useState<backend.FlipRowItem[]>([]);
     const [checked, setChecked] = useState(Boolean);
 
     const checkPatron = async () => {
@@ -20,10 +22,14 @@ export function HomePage() {
 
             if (_flips === null) {
                 setFlips([])
+                setCurrentFlips([])
+                setOtherFlips([])
                 return
             }
 
             setFlips(_flips)
+            setCurrentFlips(_flips)
+            setOtherFlips(_flips)
         } catch (err) {
             logger.error(`Failed to check flips for patron ${eagleId}`)
             console.error(`Failed to check flips for patron ${eagleId}. Error:`, err)
@@ -46,7 +52,7 @@ export function HomePage() {
         try {
             FlipPatronDB(eagleId)
             cancelFlip()
-            
+
             logger.success(`Flipped ${eagleId}.`)
         } catch (err) {
             logger.error(`Failed to flip ${eagleId}.`)
@@ -78,10 +84,10 @@ export function HomePage() {
             {checked && (
                 flips.length < 2 ? (
                     <>
-                        <CanFlipBanner patron={eagleId}flips={2 - flips.length} />
+                        <CanFlipBanner patron={eagleId} flips={2 - flips.length} />
                     </>
                 ) : (
-                    <MaximumFlipsReachedBanner patron={eagleId}/>
+                    <MaximumFlipsReachedBanner patron={eagleId} />
                 )
             )}
             {checked && (
@@ -91,10 +97,15 @@ export function HomePage() {
                             <h2>Current Semester</h2>
                         </div>
                         <div className='semesters'>
-                            {
-
-                            }
-                            <div className='wide-center'><span>No recorded flips from this semester.</span></div>
+                            {currentFlips.length == 0 ? (
+                                <div className='wide-center'><span>No recorded flips from this semester.</span></div>
+                            ) : (
+                                <>
+                                    {currentFlips?.map((flip: backend.FlipRowItem, i) => (
+                                        <FlipInstance id={i} date={flip.FlipTime} />
+                                    ))}
+                                </>
+                            )}
                         </div>
                     </div>
 
