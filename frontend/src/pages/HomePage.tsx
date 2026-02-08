@@ -75,10 +75,10 @@ export function HomePage() {
             {checked && (
                 flips.length < 2 ? (
                     <>
-                        <CanFlipBanner flips={2 - flips.length} />
+                        <CanFlipBanner patron={eagleId}flips={2 - flips.length} />
                     </>
                 ) : (
-                    <MaximumFlipsReachedBanner />
+                    <MaximumFlipsReachedBanner patron={eagleId}/>
                 )
             )}
             {checked && (
