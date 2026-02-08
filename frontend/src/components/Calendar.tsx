@@ -11,6 +11,7 @@ export interface CalendarProps {
 interface CalendarDay {
     day: number,
     isCurrentMonth: boolean,
+    isCurrentSelection: boolean,
     dateString: string,
 }
 
@@ -36,16 +37,27 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
             days.push({
                 day: previousMonthLastDay - i,
                 isCurrentMonth: false,
-                dateString: new Date(year, month - 1, previousMonthLastDay - i).toISOString().split('T')[0]
+                dateString: new Date(year, month - 1, previousMonthLastDay - i).toISOString().split('T')[0],
+                isCurrentSelection: false
             })
         }
 
         // Add actual days
         for (let d = 1; d <= totalDays; d++) {
+            let isCurrentSelection = false
+            if (!SelectedDate) {
+                isCurrentSelection = false;
+            } else {
+                if (d == SelectedDate.getDate() && year == SelectedDate.getFullYear() && month == SelectedDate.getMonth()) {
+                    isCurrentSelection = d == SelectedDate.getDate()
+                } 
+            }
+
             days.push({
                 day: d,
                 isCurrentMonth: true,
-                dateString: new Date(year, month, d).toISOString().split('T')[0]
+                dateString: new Date(year, month, d).toISOString().split('T')[0],
+                isCurrentSelection: isCurrentSelection
             })
         }
 
@@ -56,7 +68,8 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
             days.push({
                 day: e,
                 isCurrentMonth: false,
-                dateString: new Date(year, month + 1, e).toISOString().split('T')[0]
+                dateString: new Date(year, month + 1, e).toISOString().split('T')[0],
+                isCurrentSelection: false
             })
         }
 
@@ -128,7 +141,7 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
                 </div>
                 <div className="calendar-buttons">
                     {days?.map((day: CalendarDay, d) => (
-                        <CalendarButton key={d} text={day.day.toString()} dateString={day.dateString} isCurrentMonth={day.isCurrentMonth} setDateFunction={handleSetDate} />
+                        <CalendarButton key={d} text={day.day.toString()} dateString={day.dateString} isCurrentMonth={day.isCurrentMonth} setDateFunction={handleSetDate} isSelected={day.isCurrentSelection}/>
                     ))
                     }
                 </div>

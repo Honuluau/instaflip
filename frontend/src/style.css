@@ -581,6 +581,11 @@ h1.page-header {
     cursor: default;
 }
 
+.calendar-buttons .selected {
+    background-color: var(--accent1);
+    color: #FFFFFF;
+}
+
 .calendar-buttons {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -588,8 +593,10 @@ h1.page-header {
 
 
 .calendar-button button {
+    aspect-ratio: 1 / 1;
     display: flex;
-    padding: 4px;
+    padding: 8px;
+    border-radius: 50%;
 }
 
 .calendar-button button:hover {

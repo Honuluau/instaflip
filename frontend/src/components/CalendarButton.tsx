@@ -2,11 +2,12 @@ interface Props {
     text: String,
     dateString?: String,
     setDateFunction?: Function,
-    isCurrentMonth?: boolean
+    isCurrentMonth?: boolean,
+    isSelected?: boolean
 }
 
-export function CalendarButton({text, dateString, setDateFunction, isCurrentMonth}: Props) {
-    const gray = `${isCurrentMonth? '' : 'gray'}`;
+export function CalendarButton({text, dateString, setDateFunction, isCurrentMonth, isSelected}: Props) {
+    const gray = `${isCurrentMonth? '' : 'gray'}${isSelected? 'selected' : ''}`;
 
     const onClickHandle = () => {
         if (!setDateFunction) return;
