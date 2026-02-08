@@ -8,6 +8,7 @@ import { CheckFlipsDB, FlipPatronDB } from "../../wailsjs/go/main/App";
 import { backend } from "../../wailsjs/go/models";
 import { logger } from "../lib/logger";
 import { getSettings, type Settings as SettingsType } from "../lib/settings";
+import { Overlay } from "../components/Overlay";
 
 export function HomePage() {
     const [settings, setSettings] = useState<SettingsType>(getSettings());
@@ -16,6 +17,7 @@ export function HomePage() {
     const [currentFlips, setCurrentFlips] = useState<backend.FlipRowItem[]>([]);
     const [otherFlips, setOtherFlips] = useState<backend.FlipRowItem[]>([]);
     const [checked, setChecked] = useState(Boolean);
+    const [outOfDate, setOutOfDate] = useState(Boolean);
 
     const checkPatron = async () => {
         try {
@@ -74,94 +76,114 @@ export function HomePage() {
         }
     }
 
+    const checkSettingsOutOfDate = () => {
+        let currentEpoch: number = Date.now();
+        if (settings.semesterStart < currentEpoch && currentEpoch < settings.semesterEnd) {
+            setOutOfDate(false);
+        } else {
+            setOutOfDate(true);
+        }
+    }
+
     useEffect(() => {
         setSettings(settings);
+        checkSettingsOutOfDate();
     }, [])
 
     return (
-        <div className="pageContainer">
-            <Header />
-            <div className='container'>
-                <div className='form-div'>
-                    <h2>Flip Patron</h2>
-                    <div className='flex input-button'>
-                        <input
-                            type="text"
-                            placeholder='Eagle Id'
-                            onChange={(e) => {
-                                setEagleId(e.target.value)
-                                setChecked(false)
-                            }}
-                            value={eagleId}
-                            onKeyDown={(e) => handleKeyDown(e.key)}
-                        ></input>
-                        <button className='accent check-btn' onClick={checkPatron}><User size={16} /><span>Check</span></button>
+        <>
+            {outOfDate? (
+                <>
+                    <Overlay label="Semesters are out of date." text="Please change the semester settings by clicking the calendar button on the left-side of this window."/>
+                </>
+            ): (
+                <></>
+            )}
+
+            <div className="pageContainer">
+                <Header />
+                <div className='container'>
+                    <div className='form-div'>
+                        <h2>Flip Patron</h2>
+                        <div className='flex input-button'>
+                            <input
+                                type="text"
+                                placeholder='Eagle Id'
+                                onChange={(e) => {
+                                    setEagleId(e.target.value)
+                                    setChecked(false)
+                                }}
+                                value={eagleId}
+                                onKeyDown={(e) => handleKeyDown(e.key)}
+                            ></input>
+                            <button className='accent check-btn' onClick={checkPatron}><User size={16} /><span>Check</span></button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {checked && (
-                currentFlips.length < settings.maxFlips ? (
+                {checked && (
+                    currentFlips.length < settings.maxFlips ? (
+                        <>
+                            <CanFlipBanner patron={eagleId} flips={settings.maxFlips - currentFlips.length} />
+                        </>
+                    ) : (
+                        <MaximumFlipsReachedBanner patron={eagleId} />
+                    )
+                )}
+                {checked && (
                     <>
-                        <CanFlipBanner patron={eagleId} flips={settings.maxFlips - currentFlips.length} />
-                    </>
-                ) : (
-                    <MaximumFlipsReachedBanner patron={eagleId} />
-                )
-            )}
-            {checked && (
-                <>
-                    <div className='container flex-col'>
-                        <div className='semesters-header'>
-                            <h2>Current Semester</h2>
-                        </div>
-                        <div className='semesters'>
-                            {currentFlips.length == 0 ? (
-                                <div className='wide-center'><span>No recorded flips from this semester.</span></div>
-                            ) : (
-                                <>
-                                    {currentFlips?.map((flip: backend.FlipRowItem, i) => (
-                                        <FlipInstance key={i} id={i} date={flip.FlipTime} />
-                                    ))}
-                                </>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className='container button-row'>
-                        {currentFlips.length < settings.maxFlips && (
-                            <div className='colorful-card'>
-                                <button className='flip-btn' onClick={flipPatron}>
-                                    <Repeat size={20} />
-                                    <span>Flip Patron</span>
-                                </button>
-                            </div>
-                        )}
-                        <button className='flip-btn cancel' onClick={cancelFlip}>
-                            <X size={20} />
-                            <span>Cancel</span>
-                        </button>
-                    </div>
-
-                    {otherFlips.length > 0 && (
                         <div className='container flex-col'>
                             <div className='semesters-header'>
-                                <h2>Other</h2>
+                                <h2>Current Semester</h2>
                             </div>
                             <div className='semesters'>
-                                {otherFlips.length == 0 ? (
+                                {currentFlips.length == 0 ? (
                                     <div className='wide-center'><span>No recorded flips from this semester.</span></div>
                                 ) : (
                                     <>
-                                        {otherFlips?.map((flip: backend.FlipRowItem, i) => (
+                                        {currentFlips?.map((flip: backend.FlipRowItem, i) => (
                                             <FlipInstance key={i} id={i} date={flip.FlipTime} />
                                         ))}
                                     </>
                                 )}
                             </div>
                         </div>
-                    )}
-                </>
-            )}
-        </div>
+
+                        <div className='container button-row'>
+                            {currentFlips.length < settings.maxFlips && (
+                                <div className='colorful-card'>
+                                    <button className='flip-btn' onClick={flipPatron}>
+                                        <Repeat size={20} />
+                                        <span>Flip Patron</span>
+                                    </button>
+                                </div>
+                            )}
+                            <button className='flip-btn cancel' onClick={cancelFlip}>
+                                <X size={20} />
+                                <span>Cancel</span>
+                            </button>
+                        </div>
+
+                        {otherFlips.length > 0 && (
+                            <div className='container flex-col'>
+                                <div className='semesters-header'>
+                                    <h2>Other</h2>
+                                </div>
+                                <div className='semesters'>
+                                    {otherFlips.length == 0 ? (
+                                        <div className='wide-center'><span>No recorded flips from this semester.</span></div>
+                                    ) : (
+                                        <>
+                                            {otherFlips?.map((flip: backend.FlipRowItem, i) => (
+                                                <FlipInstance key={i} id={i} date={flip.FlipTime} />
+                                            ))}
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
+        </>
     )
 }

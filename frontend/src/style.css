@@ -607,3 +607,31 @@ span .primary {
     justify-content: center;
     align-items: center;
 }
+
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(2, 2, 2, .2);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-box {
+    position: fixed;
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    z-index: 3;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+}
+
+.overlay h2 {
+    margin-bottom: 0.25rem;
+}
+
+.overlay h3 {
+    margin: 0;
+}
