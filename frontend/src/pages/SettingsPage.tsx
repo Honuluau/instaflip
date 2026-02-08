@@ -67,6 +67,20 @@ export function SettingsPage() {
         }
     }
 
+    const handleMaxFlips = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let flipAmount = e.target.valueAsNumber || 2
+
+        try {
+            console.log(`Flip Amount Changed: ${flipAmount}`)
+            const updated = {... tempSettings, maxFlips: flipAmount}
+            setTempSettings(updated)
+            checkDifference(updated);
+        } catch (err) {
+            console.error("Error setting max flips per semester:", err)
+            logger.error("Error setting max flips per semester.")
+        }
+    }
+
     useEffect(() => {
 
     }, [difference])
@@ -87,7 +101,7 @@ export function SettingsPage() {
             <div className="semester-date-settings">
                 <div className="flex-col">
                     <h4>Maximum Amount of Flips per Semester</h4>
-                    <input type='number' placeholder="2" />
+                    <input type='number' placeholder={savedSettings.maxFlips.toString()} onChange={handleMaxFlips}/>
                 </div>
             </div>
             <div>

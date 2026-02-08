@@ -3,7 +3,7 @@ export namespace backend {
 	export class FlipRowItem {
 	    ID: number;
 	    EagleID: string;
-	    FlipTime: string;
+	    FlipTime: number;
 	
 	    static createFrom(source: any = {}) {
 	        return new FlipRowItem(source);

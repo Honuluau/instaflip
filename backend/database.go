@@ -11,15 +11,15 @@ import (
 )
 
 type FlipRow struct {
-	ID       int64     `"json:id"`
-	EagleID  string    `"json:eagle_id"`
-	FlipTime time.Time `"json:flip_time"`
+	ID       int64  `"json:id"`
+	EagleID  string `"json:eagle_id"`
+	FlipTime int64  `"json:flip_time"`
 }
 
 type FlipRowItem struct {
 	ID       int64  `"json:id"`
 	EagleID  string `"json:eagle_id"`
-	FlipTime string `"json:flip_time"`
+	FlipTime int64  `"json:flip_time"`
 }
 
 var db *sql.DB
@@ -53,7 +53,7 @@ func InitDB() error {
 		CREATE TABLE IF NOT EXISTS flips (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			eagle_id TEXT NOT NULL,
-			flip_time DATETIME
+			flip_time INTEGER
 		);
 	`)
 	if err != nil {
@@ -82,7 +82,7 @@ func FlipPatron(eagleID string) error {
 	_, err := db.Exec(`
 		INSERT INTO flips (eagle_id, flip_time)
 		VALUES (?, ?)
-	`, eagleID, time.Now())
+	`, eagleID, time.Now().UnixMilli())
 
 	return err
 }
@@ -107,12 +107,12 @@ func CheckFlips(eagleID string) (flips []FlipRowItem, err error) {
 
 	for rows.Next() {
 		var flip FlipRowItem
-		var flipTime time.Time
+		var flipTime int64
 
 		if err := rows.Scan(&flip.ID, &flip.EagleID, &flipTime); err != nil {
 			continue
 		}
-		flip.FlipTime = flipTime.Format("2006-01-02 15:04")
+		flip.FlipTime = flipTime
 
 		flips = append(flips, flip)
 	}

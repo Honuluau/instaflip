@@ -2,13 +2,15 @@ import { Repeat, User, X } from "lucide-react";
 import { CanFlipBanner, MaximumFlipsReachedBanner } from "../components/Banners";
 import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CheckFlipsDB, FlipPatronDB } from "../../wailsjs/go/main/App";
 import { backend } from "../../wailsjs/go/models";
 import { logger } from "../lib/logger";
+import { getSettings, type Settings as SettingsType } from "../lib/settings";
 
 export function HomePage() {
+    const [settings, setSettings] = useState<SettingsType>(getSettings());
     const [eagleId, setEagleId] = useState("");
     const [flips, setFlips] = useState<backend.FlipRowItem[]>([]);
     const [currentFlips, setCurrentFlips] = useState<backend.FlipRowItem[]>([]);
@@ -60,6 +62,10 @@ export function HomePage() {
         }
     }
 
+    useEffect(() => {
+        setSettings(settings);
+    }, [])
+
     return (
         <div className="pageContainer">
             <Header />
@@ -82,9 +88,9 @@ export function HomePage() {
                 </div>
             </div>
             {checked && (
-                flips.length < 2 ? (
+                currentFlips.length < settings.maxFlips ? (
                     <>
-                        <CanFlipBanner patron={eagleId} flips={2 - flips.length} />
+                        <CanFlipBanner patron={eagleId} flips={settings.maxFlips - currentFlips.length} />
                     </>
                 ) : (
                     <MaximumFlipsReachedBanner patron={eagleId} />
@@ -102,7 +108,7 @@ export function HomePage() {
                             ) : (
                                 <>
                                     {currentFlips?.map((flip: backend.FlipRowItem, i) => (
-                                        <FlipInstance id={i} date={flip.FlipTime} />
+                                        <FlipInstance key={i} id={i} date={flip.FlipTime} />
                                     ))}
                                 </>
                             )}
@@ -110,7 +116,7 @@ export function HomePage() {
                     </div>
 
                     <div className='container button-row'>
-                        {flips.length < 2 && (
+                        {currentFlips.length < settings.maxFlips && (
                             <div className='colorful-card'>
                                 <button className='flip-btn' onClick={flipPatron}>
                                     <Repeat size={20} />
@@ -129,8 +135,8 @@ export function HomePage() {
                             <h2>Other</h2>
                         </div>
                         <div className='semesters'>
-                            <FlipInstance id={1} date='January 29th, 2026 at 12:24 PM' />
-                            <FlipInstance id={2} date='March 11th, 2026 at 6:88 PM' />
+                            <FlipInstance id={1} date={1} />
+                            <FlipInstance id={2} date={1} />
                         </div>
                     </div>
                 </>
