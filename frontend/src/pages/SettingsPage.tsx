@@ -2,6 +2,7 @@ import { Calendar, CalendarFold, Save } from "lucide-react";
 import { Datebox } from "../components/Datebox";
 import { getSettings, saveSettings, type Settings as SettingsType } from "../lib/settings";
 import { useEffect, useState } from "react";
+import { logger } from "../lib/logger";
 
 export function SettingsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
@@ -10,13 +11,24 @@ export function SettingsPage() {
     const onSave = () => {
         saveSettings(tempSettings);
         setSavedSettings(tempSettings);
+        logger.success('Saved settings.')
     }
 
-    const handleSemesterStart = () => {
+    const handleSemesterStart = (epochNum: number) => {
         try {
-
+            tempSettings.semesterStart = epochNum
         } catch (err) {
             console.error("Error setting start of semester:", err)
+            logger.error("Error setting start of semester.")
+        }
+    }
+
+    const handleSemesterEnd = (epochNum: number) => {
+        try {
+            tempSettings.semesterEnd = epochNum
+        } catch (err) {
+            console.error("Error setting end of semester:", err)
+            logger.error("Error setting end of semester.")
         }
     }
 
@@ -26,11 +38,11 @@ export function SettingsPage() {
             <div className="semester-date-settings">
                 <div>
                     <h4>Semester Start</h4>
-                    <Datebox date='01/01/2026'/>
+                    <Datebox date={new Date(savedSettings.semesterStart)} update={handleSemesterStart}/>
                 </div>
                 <div>
                     <h4>Semester End</h4>
-                    <Datebox date='01/01/2027' />
+                    <Datebox date={new Date(savedSettings.semesterEnd)} update={handleSemesterEnd}/>
                 </div>
             </div>
             <div className="semester-date-settings">

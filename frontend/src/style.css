@@ -563,14 +563,36 @@ h1.page-header {
 }
 
 .calendar-week-row {
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 }
 
 .calendar-button {
-    padding: 2px;
+    padding: 4px;
+    margin: 4px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.gray .calendar-button{
+.gray {
     color: #cccccc;
     cursor: default;
+}
+
+.calendar-buttons {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+
+.calendar-button button {
+    display: flex;
+    padding: 4px;
+}
+
+.calendar-button button:hover {
+    background-color: var(--border / 50%);
 }
