@@ -39,3 +39,8 @@ func (a *App) FlipPatronDB(eagle_id string) error {
 func (a *App) CheckFlipsDB(eagle_id string) (flips []backend.FlipRowItem, err error) {
 	return backend.CheckFlips(eagle_id)
 }
+
+// Select Folder
+func (a *App) SelectFolder(defaultPath string) (string, error) {
+	return backend.SelectFolderDialog(a.ctx, defaultPath)
+}

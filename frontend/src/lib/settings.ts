@@ -2,12 +2,14 @@ export interface Settings {
     semesterStart: number;
     semesterEnd: number;
     maxFlips: number;
+    statisticsOutputPath: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
     semesterStart: Date.parse("2000-01-01"),
     semesterEnd: Date.parse("2001-01-01"),
-    maxFlips: 2
+    maxFlips: 2,
+    statisticsOutputPath: ""
 }
 
 const SETTINGS_KEY = "instaflip-settings"

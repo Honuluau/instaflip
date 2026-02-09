@@ -7,3 +7,5 @@ export function CheckFlipsDB(arg1:string):Promise<Array<backend.FlipRowItem>>;
 export function FlipPatronDB(arg1:string):Promise<void>;
 
 export function Greet(arg1:string):Promise<string>;
+
+export function SelectFolder(arg1:string):Promise<string>;

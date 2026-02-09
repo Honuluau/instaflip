@@ -1,0 +1,42 @@
+package backend
+
+import (
+	"context"
+	"fmt"
+	"os"
+	"path/filepath"
+
+	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
+)
+
+func GetDefaultDownloadPath() string {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Println("COULD NOT GET DEFAULT DOWNLOAD PATH")
+		return ""
+	}
+
+	return filepath.Join(homeDir, "/Instaflip Exports")
+}
+
+func SelectFolderDialog(ctx context.Context, defaultPath string) (string, error) {
+	if defaultPath == "" {
+		defaultPath = GetDefaultDownloadPath()
+	}
+
+	options := wailsRuntime.OpenDialogOptions{
+		Title:            "Select Export Folder",
+		DefaultDirectory: defaultPath,
+	}
+
+	selectedPath, err := wailsRuntime.OpenDirectoryDialog(ctx, options)
+	if err != nil {
+		return "", err
+	}
+
+	if selectedPath == "" {
+		return "", nil
+	}
+
+	return selectedPath, nil
+}

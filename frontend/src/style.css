@@ -645,3 +645,12 @@ span .primary {
 .overlay h3 {
     margin: 0;
 }
+
+.semester-date-settings .flex-row {
+    gap: 0.5rem;
+}
+
+.semester-date-settings .flex-row button {
+    border: 0px;
+    box-shadow: 0px 0px 5px #cccccc;
+}
