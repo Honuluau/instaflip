@@ -93,6 +93,11 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
         Cancel();
     }
 
+    const todayFunc = () => {
+        setSelectedDate(new Date())
+        handleSetDays(new Date())
+    }
+
     useEffect(() => {
         setSelectedDate(new Date(SelectedDate));
         handleSetDays(new Date(SelectedDate));
@@ -150,6 +155,7 @@ export function Calendar({ SelectedDate, Cancel, SetDateFunction }: CalendarProp
             {/*Footer*/}
             <div className="footer">
                 <button onClick={() => Cancel()}>Cancel</button>
+                <button onClick={todayFunc}>Today</button>
             </div>
         </div>
     )
