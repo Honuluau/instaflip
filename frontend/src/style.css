@@ -574,6 +574,11 @@ h1.page-header {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 0px;
+}
+
+.calendar-button button {
+    border: 0px;
 }
 
 .gray {
@@ -599,7 +604,11 @@ h1.page-header {
     border-radius: 50%;
 }
 
-.calendar-button button:hover {
+.calendar-week-row button:hover {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.calendar-buttons.calendar-button button:hover {
     background-color: var(--border / 50%);
 }
 
