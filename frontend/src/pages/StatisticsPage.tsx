@@ -1,8 +1,9 @@
-export default function() {
+export function StatisticsPage() {
     return (
-        <div className="flex1 flex-col">
-            <div className="container no-top-margin">
-                <h1>Statistics</h1>
+        <div className="container no-top-margin flex-col justify-start">
+            <h1 className="page-header">Statistics</h1>
+            <div>
+                <span>Hello World!</span>
             </div>
         </div>
     )

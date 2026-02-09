@@ -4,7 +4,7 @@ import { PageType, Sidebar } from './components/Sidebar';
 import { Topbar } from './components/Topbar';
 import { Header } from './components/Header';
 import { SettingsPage } from './pages/SettingsPage';
-import StatisticsPage from './pages/StatisticsPage';
+import { StatisticsPage } from './pages/StatisticsPage';
 import { DebugPage } from './pages/DebugPage';
 import { Check, Cross, EllipsisVertical, EyeOff, OctagonAlert, Repeat, User, X } from 'lucide-react';
 import { InfoPage } from './pages/InfoPage';
