@@ -3,6 +3,7 @@ import { Datebox } from "../components/Datebox";
 import { getSettings, Settings as SettingsType } from "../lib/settings";
 import { Download } from "lucide-react";
 import { ExportStatistics } from "../../wailsjs/go/main/App";
+import { logger } from "../lib/logger";
 
 export function StatisticsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
@@ -19,7 +20,9 @@ export function StatisticsPage() {
 
     const onExport = async () => {
         const exported = await ExportStatistics(exportStart, exportEnd, savedSettings.statisticsOutputPath)
-        console.log(exported)
+        if (exported) {
+            logger.success(`Exported Data from ${exportStart} -> ${exportEnd} to "${savedSettings.statisticsOutputPath}"`)
+        }
     }
 
     return (
