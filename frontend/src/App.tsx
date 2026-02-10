@@ -11,6 +11,7 @@ import { InfoPage } from './pages/InfoPage';
 import { FlipInstance } from './components/FlipInstance';
 import { CanFlipBanner, MaximumFlipsReachedBanner } from './components/Banners';
 import { HomePage } from './pages/HomePage';
+import { ToastContainer } from './components/ToastContainer';
 
 export const version = "v1.0_dev"
 
@@ -33,14 +34,17 @@ function App() {
     }
 
     return (
-        <div className="root" id="root">
-            <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
+        <>
+            <ToastContainer />
+            <div className="root" id="root">
+                <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
 
-            <div className="flex1 flex-col">
-                <Topbar />
-                {renderPage()}
+                <div className="flex1 flex-col">
+                    <Topbar />
+                    {renderPage()}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
