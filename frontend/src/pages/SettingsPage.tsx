@@ -82,10 +82,14 @@ export function SettingsPage() {
     }
 
     const onBrowse = async () => {
-        console.log('browsing')
-        try{
+        try {
             const selectedPath = await SelectFolder(tempSettings.statisticsOutputPath || "")
-            console.log(selectedPath)
+
+            if (selectedPath != "") {
+                const updated = { ...tempSettings, statisticsOutputPath: selectedPath }
+                setTempSettings(updated)
+                checkDifference(updated)
+            }
         } catch (error) {
             console.error("Error selecting folder:", error)
             logger.error("Error selecting folder.")
@@ -119,9 +123,9 @@ export function SettingsPage() {
                 <div className="flex-col">
                     <h4>Export Folder Path</h4>
                     <div className="flex-row">
-                        <input placeholder={savedSettings.statisticsOutputPath} />
+                        <input placeholder={tempSettings.statisticsOutputPath} />
                         <button className="accent check-btn no-margin" onClick={onBrowse}>
-                            <Folder size={16}/>
+                            <Folder size={16} />
                             <span>Browse</span>
                         </button>
                     </div>
