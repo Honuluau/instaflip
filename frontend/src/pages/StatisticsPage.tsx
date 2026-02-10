@@ -17,8 +17,9 @@ export function StatisticsPage() {
         setExportEnd(epochNum)
     }
 
-    const onExport = () => {
-        ExportStatistics(exportStart, exportEnd)
+    const onExport = async () => {
+        const exported = await ExportStatistics(exportStart, exportEnd, savedSettings.statisticsOutputPath)
+        console.log(exported)
     }
 
     return (

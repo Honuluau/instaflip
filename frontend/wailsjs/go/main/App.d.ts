@@ -4,7 +4,7 @@ import {backend} from '../models';
 
 export function CheckFlipsDB(arg1:string):Promise<Array<backend.FlipRowItem>>;
 
-export function ExportStatistics(arg1:number,arg2:number):Promise<boolean>;
+export function ExportStatistics(arg1:number,arg2:number,arg3:string):Promise<boolean>;
 
 export function FlipPatronDB(arg1:string):Promise<void>;
 

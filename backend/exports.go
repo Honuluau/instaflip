@@ -44,7 +44,8 @@ func SelectFolderDialog(ctx context.Context, defaultPath string) (string, error)
 	return selectedPath, nil
 }
 
-func Export(startEpoch, endEpoch int64) (bool, error) {
-	fmt.Println("Recieved:", startEpoch, endEpoch)
-	return true, nil
+func Export(startEpoch, endEpoch int64, path string) (bool, error) {
+	fmt.Println("Recieved:", startEpoch, endEpoch, path)
+	success, err := ExportRange(startEpoch, endEpoch, path)
+	return success, err
 }
