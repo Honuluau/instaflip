@@ -16,7 +16,10 @@ func GetDefaultDownloadPath() string {
 		return ""
 	}
 
-	return filepath.Join(homeDir, "/Instaflip Exports")
+	exportsDir := filepath.Join(homeDir, "/Instaflip Exports")
+	os.MkdirAll(exportsDir, os.ModePerm)
+
+	return exportsDir
 }
 
 func SelectFolderDialog(ctx context.Context, defaultPath string) (string, error) {

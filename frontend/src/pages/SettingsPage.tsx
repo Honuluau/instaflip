@@ -82,6 +82,7 @@ export function SettingsPage() {
     }
 
     const onBrowse = async () => {
+        console.log('browsing')
         try{
             const selectedPath = await SelectFolder(tempSettings.statisticsOutputPath || "")
             console.log(selectedPath)
