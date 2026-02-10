@@ -673,6 +673,7 @@ span .primary {
     flex-direction: column;
     align-items: center;
     justify-content: end;
+    gap: .5rem;
 }
 
 .toast {
@@ -683,27 +684,16 @@ span .primary {
     padding: 10px;
     width: fit-content;
     gap: 0.5rem;
+    
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.ineligible {
-    --error: #f2666b;
-    --error2: rgba(92, 18, 18, 0.9);
-
-    background-color: var(--error);
-    border: 1px solid var(--error2);
-    box-shadow: 0px 0px 3px var(--error);
-    color: var(--error2);
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
 }
-
-.eligible {
-    --success: #cbf99a;
-
-    background-color: var(--success);
-    border: 1px solid rgb(0, 255, 0);
-    box-shadow: 0px 0px 3px var(--success);
-    color: rgb(12, 77, 29)
-}
-
 
 .success-toast {
     --success: #cbf99a;

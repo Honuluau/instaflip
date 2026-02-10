@@ -1,10 +1,10 @@
 import { Check, X } from "lucide-react"
-
-export type toastType = "SUCCESS" | "ERROR"
+import { useEffect } from "react"
+import { toastType } from "../lib/toaster"
 
 export interface toastProps {
     toastType: toastType,
-    text: string
+    text: string,
 }
 
 export function Toast({toastType, text}: toastProps) {

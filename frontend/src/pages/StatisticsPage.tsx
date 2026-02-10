@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Datebox } from "../components/Datebox";
 import { getSettings, Settings as SettingsType } from "../lib/settings";
-import { Download } from "lucide-react";
+import { Bell, Download } from "lucide-react";
 import { ExportStatistics } from "../../wailsjs/go/main/App";
 import { logger } from "../lib/logger";
+import { addToast } from "../components/ToastContainer"
+import { toaster } from "../lib/toaster";
 
 export function StatisticsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
@@ -25,6 +27,10 @@ export function StatisticsPage() {
         }
     }
 
+    const onNotif = () => {
+        toaster.addToast("SUCCESS", "Successfuly exported!", 3000);
+    }
+
     return (
         <div className="container no-top-margin flex-col justify-start">
             <h1 className="page-header">Statistics</h1>
@@ -43,6 +49,12 @@ export function StatisticsPage() {
                 <button className="accent check-btn no-margin" onClick={onExport}>
                     <Download size={20}/>
                     <span>Export</span>
+                </button>
+            </div>
+            <div>
+                <button className="accent check-btn no-margin" onClick={onNotif}>
+                    <Bell size={20}/>
+                    <span>Toast</span>
                 </button>
             </div>
         </div>
