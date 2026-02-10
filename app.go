@@ -44,3 +44,8 @@ func (a *App) CheckFlipsDB(eagle_id string) (flips []backend.FlipRowItem, err er
 func (a *App) SelectFolder(defaultPath string) (string, error) {
 	return backend.SelectFolderDialog(a.ctx, defaultPath)
 }
+
+// On Export
+func (a *App) ExportStatistics(startEpoch, endEpoch int64) (bool, error) {
+	return backend.Export(startEpoch, endEpoch)
+}
