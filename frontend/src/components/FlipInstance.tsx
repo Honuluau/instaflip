@@ -4,13 +4,20 @@ import { useState } from "react";
 interface FlipInstanceProps {
     id: number;
     date: number;
+    deleteFlip: Function;
 }
 
-export function FlipInstance({ id, date }: FlipInstanceProps) {
+export function FlipInstance({ id, date, deleteFlip }: FlipInstanceProps) {
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
     const handleDropdown = () => {
         setShowDropdown(!showDropdown);
+    }
+
+    const deleteInstance = () => {
+        console.log(`DELETE ${id} AT ${date}`);
+        setShowDropdown(false);
+        deleteFlip(id, date)
     }
 
     return (
@@ -26,7 +33,7 @@ export function FlipInstance({ id, date }: FlipInstanceProps) {
                 {showDropdown && (
                     <>
                         <div className="dropdown">
-                            <button className="delete-btn">
+                            <button className="delete-btn" onClick={deleteInstance}>
                                 <Trash size={20}/>
                                 <span>Delete</span>
                             </button>

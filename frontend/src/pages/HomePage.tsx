@@ -88,6 +88,10 @@ export function HomePage() {
         }
     }
 
+    const deleteFlip = (id: number, date: number) => {
+        console.log(`recieved ${id} and ${date} with ${eagleId}`);
+    }
+
     useEffect(() => {
         setSettings(settings);
         checkSettingsOutOfDate();
@@ -144,7 +148,7 @@ export function HomePage() {
                                 ) : (
                                     <>
                                         {currentFlips?.map((flip: backend.FlipRowItem, i) => (
-                                            <FlipInstance key={i} id={i} date={flip.FlipTime} />
+                                            <FlipInstance key={i} id={i} date={flip.FlipTime} deleteFlip={deleteFlip}/>
                                         ))}
                                     </>
                                 )}
@@ -177,7 +181,7 @@ export function HomePage() {
                                     ) : (
                                         <>
                                             {otherFlips?.map((flip: backend.FlipRowItem, i) => (
-                                                <FlipInstance key={i} id={i} date={flip.FlipTime} />
+                                                <FlipInstance key={i} id={i} date={flip.FlipTime} deleteFlip={deleteFlip}/>
                                             ))}
                                         </>
                                     )}
