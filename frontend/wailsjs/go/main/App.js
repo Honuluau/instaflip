@@ -6,6 +6,10 @@ export function CheckFlipsDB(arg1) {
   return window['go']['main']['App']['CheckFlipsDB'](arg1);
 }
 
+export function DeleteFlip(arg1, arg2) {
+  return window['go']['main']['App']['DeleteFlip'](arg1, arg2);
+}
+
 export function ExportStatistics(arg1, arg2, arg3) {
   return window['go']['main']['App']['ExportStatistics'](arg1, arg2, arg3);
 }

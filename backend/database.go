@@ -175,3 +175,22 @@ func ExportRange(start int64, end int64, path string) (bool, error) {
 
 	return true, nil
 }
+
+func DeleteFlip(eagleID string, date int64) (bool, error) {
+	if db == nil {
+		if err := InitDB(); err != nil {
+			return false, err
+		}
+	}
+
+	_, err := db.Exec(`
+	DELETE FROM flips
+	WHERE eagle_id = ? AND flip_time = ?
+	`, eagleID, date)
+
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}

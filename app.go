@@ -50,3 +50,9 @@ func (a *App) ExportStatistics(startEpoch, endEpoch int64, path string) (bool, e
 	success, err := backend.Export(startEpoch, endEpoch, path)
 	return success, err
 }
+
+// Delete Flip
+func (a *App) DeleteFlip(eagleID string, date int64) (bool, error) {
+	success, err := backend.DeleteFlip(eagleID, date)
+	return success, err
+}

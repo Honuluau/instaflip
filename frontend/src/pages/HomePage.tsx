@@ -4,7 +4,7 @@ import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
 import { useEffect, useState } from "react";
 
-import { CheckFlipsDB, FlipPatronDB } from "../../wailsjs/go/main/App";
+import { CheckFlipsDB, DeleteFlip, FlipPatronDB } from "../../wailsjs/go/main/App";
 import { backend } from "../../wailsjs/go/models";
 import { logger } from "../lib/logger";
 import { getSettings, type Settings as SettingsType } from "../lib/settings";
@@ -88,8 +88,19 @@ export function HomePage() {
         }
     }
 
-    const deleteFlip = (id: number, date: number) => {
+    const deleteFlip = async (id: number, date: number) => {
         console.log(`recieved ${id} and ${date} with ${eagleId}`);
+        const success = await DeleteFlip(eagleId, date);
+
+        if (success) { // This error is wrong.
+            const msg = `Deleted ${date} for ${eagleId}.`;
+            logger.success(msg);
+            toaster.addToast('SUCCESS', msg, 3000);
+        } else {
+            const msg = `Failed to delete ${date} for ${eagleId}`;
+            logger.error(msg);
+            toaster.addToast('ERROR', msg, 3000);
+        }
     }
 
     useEffect(() => {
