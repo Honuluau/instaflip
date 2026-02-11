@@ -54,6 +54,13 @@ class Logger {
     private notifyListeners() {
         this.listeners.forEach((listener) => listener())
     }
+
+    exportAsText(): string {
+        return this.logs.map(
+            (l) =>
+                `[${l.timestamp.toISOString()}] [${l.level}] ${l.message}`
+        ).join("\n");
+    }
 }
 
 export const logger = new Logger();

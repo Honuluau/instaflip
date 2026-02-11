@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { LogEntry, logger } from "../lib/logger";
+import { SaveLogs } from "../../wailsjs/go/main/App";
+import { toaster } from "../lib/toaster";
+import { Download } from "lucide-react";
 
 function formatTime(date: Date): string {
     return date.toLocaleDateString("en-us", {
@@ -27,9 +30,20 @@ export function DebugPage() {
         };
     }, []);
 
+    const onDownload = () => {
+        SaveLogs(logger.exportAsText());
+        toaster.addToast("SUCCESS", "Downloaded log successfully.", 3000);
+    }
+
     return (
         <div className="container no-top-margin flex-col justify-start">
-            <h1 className="page-header">Debug</h1>
+            <div className="flex-row justify-between">
+                <h1 className="page-header">Debug</h1>
+                <button className="accent check-btn" onClick={onDownload}>
+                    <Download size={20}/>
+                    <span>Download</span>
+                </button>
+            </div>
             <div ref={scrollRef} className="debug-log">
                 {logs.length === 0 ? (
                     <p>No logs.</p>

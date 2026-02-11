@@ -12,4 +12,6 @@ export function FlipPatronDB(arg1:string):Promise<void>;
 
 export function Greet(arg1:string):Promise<string>;
 
+export function SaveLogs(arg1:string):Promise<void>;
+
 export function SelectFolder(arg1:string):Promise<string>;

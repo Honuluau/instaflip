@@ -96,6 +96,7 @@ export function HomePage() {
             const msg = `Deleted ${date} for ${eagleId}.`;
             logger.success(msg);
             toaster.addToast('SUCCESS', msg, 3000);
+            checkPatron();
         } else {
             const msg = `Failed to delete ${date} for ${eagleId}`;
             logger.error(msg);

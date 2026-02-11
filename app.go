@@ -56,3 +56,8 @@ func (a *App) DeleteFlip(eagleID string, date int64) (bool, error) {
 	success, err := backend.DeleteFlip(eagleID, date)
 	return success, err
 }
+
+// Save Logs
+func (a *App) SaveLogs(logs string) error {
+	return backend.SaveLogs(logs)
+}

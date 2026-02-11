@@ -749,3 +749,7 @@ span .primary {
     background-color: var(--error);
     color: var(--error2);
 }
+
+.justify-between {
+    justify-content: space-between;
+}

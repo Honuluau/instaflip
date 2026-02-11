@@ -46,7 +46,7 @@ export function StatisticsPage() {
             <div>
                 <button className="accent check-btn no-margin" onClick={onExport}>
                     <Download size={20}/>
-                    <span>Export</span>
+                    <span>Export .csv</span>
                 </button>
             </div>
         </div>

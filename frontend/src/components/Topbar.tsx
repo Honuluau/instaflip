@@ -1,5 +1,7 @@
 import { Maximize, Minus, X } from "lucide-react";
 import { WindowMinimise, WindowToggleMaximise, Quit} from "../../wailsjs/runtime/runtime"
+import { SaveLogs } from "../../wailsjs/go/main/App";
+import { logger } from "../lib/logger";
 
 
 const iconSize = 16;
@@ -13,8 +15,10 @@ export function Topbar() {
         WindowToggleMaximise();
     }
 
-    const quit = () => {
-        Quit();
+    const quit = async () => {
+        logger.info("Closing InstaFlip.")
+        const success = await SaveLogs(logger.exportAsText());
+        setTimeout(() => {Quit()}, 100);
     }
 
     return (

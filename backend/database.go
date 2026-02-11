@@ -194,3 +194,21 @@ func DeleteFlip(eagleID string, date int64) (bool, error) {
 
 	return true, nil
 }
+
+func SaveLogs(logs string) error {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		homeDir = "."
+	}
+
+	path := filepath.Join(homeDir, ".instaflip", "logs")
+	// Create directory if it does not already exist.
+	if err := os.MkdirAll(path, 0755); err != nil {
+		fmt.Println("error: ", err)
+		return err
+	}
+
+	now := time.Now().Format("2006-01-02_15-04-05")
+	fullPath := filepath.Join(path, "instaflip-log_"+now+".txt")
+	return os.WriteFile(fullPath, []byte(logs), 0644)
+}

@@ -22,6 +22,10 @@ export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
 
+export function SaveLogs(arg1) {
+  return window['go']['main']['App']['SaveLogs'](arg1);
+}
+
 export function SelectFolder(arg1) {
   return window['go']['main']['App']['SelectFolder'](arg1);
 }
