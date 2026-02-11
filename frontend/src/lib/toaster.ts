@@ -25,7 +25,7 @@ class Toaster {
 
         setTimeout(() => {
             this.removeToast(id)
-        }, duration)
+        }, duration+800) // 800 ms for the animation.
     }
 
     removeToast(id: string) {

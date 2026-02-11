@@ -20,7 +20,7 @@ export function ToastContainer() {
         <div className="toast-container">
             <div className="toaster">
                 {toasts.map((toast, i) => (
-                    <Toast key={i} text={toast.text} toastType={toast.toastType}/>
+                    <Toast key={i} text={toast.text} toastType={toast.toastType} duration={toast.duration}/>
                 ))}
             </div>
         </div>

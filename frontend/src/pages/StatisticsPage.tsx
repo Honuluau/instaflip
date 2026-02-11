@@ -4,7 +4,6 @@ import { getSettings, Settings as SettingsType } from "../lib/settings";
 import { Bell, Download } from "lucide-react";
 import { ExportStatistics } from "../../wailsjs/go/main/App";
 import { logger } from "../lib/logger";
-import { addToast } from "../components/ToastContainer"
 import { toaster } from "../lib/toaster";
 
 export function StatisticsPage() {
