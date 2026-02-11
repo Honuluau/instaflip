@@ -713,3 +713,39 @@ span .primary {
     border: 1px solid var(--error2);
     color: var(--error2)
 }
+
+.action {
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    z-index: 300;
+    width: 300px;
+    background: white;
+    box-shadow: 0 0 5px var(--border);
+    border-radius: var(--radius);
+    bottom: 100%;
+    margin-bottom: 6px;
+    right: 0;
+    width: auto;
+    padding: 4px;
+}
+
+.dropdown button {
+    box-shadow: 0 0 0;
+    border: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: auto;
+    padding: 10px;
+}
+
+.dropdown .delete-btn:hover {
+    --error: #f2666b;
+    --error2: rgba(92, 18, 18, 0.9);
+
+    background-color: var(--error);
+    color: var(--error2);
+}
