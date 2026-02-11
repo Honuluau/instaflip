@@ -23,11 +23,10 @@ export function StatisticsPage() {
         const exported = await ExportStatistics(exportStart, exportEnd, savedSettings.statisticsOutputPath)
         if (exported) {
             logger.success(`Exported Data from ${exportStart} -> ${exportEnd} to "${savedSettings.statisticsOutputPath}"`)
+            toaster.addToast("SUCCESS", "Successfuly exported!", 3000);
+        } else {
+            toaster.addToast("ERROR", "Failed to download data.", 300);
         }
-    }
-
-    const onNotif = () => {
-        toaster.addToast("SUCCESS", "Successfuly exported!", 3000);
     }
 
     return (
@@ -48,12 +47,6 @@ export function StatisticsPage() {
                 <button className="accent check-btn no-margin" onClick={onExport}>
                     <Download size={20}/>
                     <span>Export</span>
-                </button>
-            </div>
-            <div>
-                <button className="accent check-btn no-margin" onClick={onNotif}>
-                    <Bell size={20}/>
-                    <span>Toast</span>
                 </button>
             </div>
         </div>

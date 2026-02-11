@@ -4,6 +4,7 @@ import { getSettings, saveSettings, type Settings as SettingsType } from "../lib
 import { useEffect, useState } from "react";
 import { logger } from "../lib/logger";
 import { SelectFolder } from "../../wailsjs/go/main/App";
+import { toaster } from "../lib/toaster";
 
 export function SettingsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
@@ -31,6 +32,7 @@ export function SettingsPage() {
         checkDifference(savedSettings);
 
         logger.success(`Saved settings. ${log}`)
+        toaster.addToast("SUCCESS", "Successfully updated settings!", 3000);
     }
 
     const checkDifference = (settings: SettingsType) => {

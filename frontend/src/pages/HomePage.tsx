@@ -9,6 +9,7 @@ import { backend } from "../../wailsjs/go/models";
 import { logger } from "../lib/logger";
 import { getSettings, type Settings as SettingsType } from "../lib/settings";
 import { Overlay } from "../components/Overlay";
+import { toaster } from "../lib/toaster";
 
 export function HomePage() {
     const [settings, setSettings] = useState<SettingsType>(getSettings());
@@ -70,9 +71,11 @@ export function HomePage() {
             cancelFlip()
 
             logger.success(`Flipped ${eagleId}.`)
+            toaster.addToast('SUCCESS', `Successfully flipped ${eagleId}`, 3000);
         } catch (err) {
             logger.error(`Failed to flip ${eagleId}.`)
             console.error(`Failed to flip ${eagleId}. Err:`, err)
+            toaster.addToast('ERROR', `Failed to flip ${eagleId}`, 3000);
         }
     }
 

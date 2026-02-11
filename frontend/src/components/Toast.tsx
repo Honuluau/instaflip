@@ -13,7 +13,6 @@ export function Toast({toastType, text, duration}: toastProps) {
 
     const triggerToast = () => {
         setShowToast(true)
-        console.log(`Duration of ${duration}ms`)
         setTimeout(() => setShowToast(false), duration)
     }
     
