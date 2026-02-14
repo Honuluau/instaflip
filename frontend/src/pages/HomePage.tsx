@@ -134,6 +134,7 @@ export function HomePage() {
                                 }}
                                 value={eagleId}
                                 onKeyDown={(e) => handleKeyDown(e.key)}
+                                className="eagle-id-input"
                             ></input>
                             <button className='accent check-btn' onClick={checkPatron}><User size={16} /><span>Check</span></button>
                         </div>

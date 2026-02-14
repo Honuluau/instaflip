@@ -12,7 +12,6 @@ import { FlipInstance } from './components/FlipInstance';
 import { CanFlipBanner, MaximumFlipsReachedBanner } from './components/Banners';
 import { HomePage } from './pages/HomePage';
 import { ToastContainer } from './components/ToastContainer';
-import "@fontsource/inter";
 
 export const version = "dev_0.6"
 
