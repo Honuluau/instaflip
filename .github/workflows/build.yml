@@ -14,9 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            platform: linux/amd64
-            artifact: linux-amd64
           - os: windows-latest
             platform: windows/amd64
             artifact: windows-amd64
