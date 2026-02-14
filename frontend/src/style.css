@@ -7,7 +7,7 @@ body {
     --accent2: rgb(37, 118, 232);
 
     --radius: 0.625rem;
-    --background: oklch(1, 0, 0);
+    --background-color: white;
     --background-hover: #f0f0f0;
     --border: #cccccc;
     --green: #00e793;
@@ -25,12 +25,12 @@ body {
     display: flex;
     flex-direction: row;
     height: 100vh;
-    background-color: var(--background);
+    background-color: rgb(255, 0, 0);
 }
 
 button {
     --wails-draggable: no-drag;
-    background-color: var(--background);
+    background-color: var(--background-color);
     border: 1px solid #FFFFFF;
     padding: 10px;
     cursor: pointer;
