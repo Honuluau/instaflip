@@ -13,7 +13,7 @@ import { CanFlipBanner, MaximumFlipsReachedBanner } from './components/Banners';
 import { HomePage } from './pages/HomePage';
 import { ToastContainer } from './components/ToastContainer';
 
-export const version = "dev_0.6"
+export const version = "dev_0.7"
 
 function App() {
     const [currentPage, setCurrentPage] = useState<PageType>("main");
