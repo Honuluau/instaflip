@@ -17,7 +17,7 @@ body {
     --sb-font-size: 1rem;
 
     padding: 0px;
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+    font-family: "Inter", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
     font-size: 0.8rem;
 }
 
@@ -25,7 +25,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 100vh;
-    background-color: rgb(255, 0, 0);
+    background-color: var(--background-color);
 }
 
 button {
@@ -775,4 +775,8 @@ span .primary {
     gap: 0.5rem;
     
     transform: translateX(20px);
+}
+
+.calendar-week-row button {
+    background-color: rgba(0, 0, 0, 0);
 }
