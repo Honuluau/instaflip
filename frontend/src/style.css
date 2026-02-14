@@ -753,3 +753,25 @@ span .primary {
 .justify-between {
     justify-content: space-between;
 }
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-section h2 {
+    margin-bottom: 0.5rem;
+}
+
+.info-section p {
+    margin: 0;
+    max-width: 50vw;
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+    transform: translateX(20px);
+}
