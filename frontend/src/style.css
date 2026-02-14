@@ -19,6 +19,7 @@ body {
     padding: 0px;
     font-family: "Inter";
     font-size: 0.8rem;
+    overflow: hidden;
 }
 
 .root {
@@ -785,3 +786,4 @@ span .primary {
 .eagle-id-input {
     font-family: "Inter";
 }
+
