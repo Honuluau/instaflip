@@ -104,6 +104,10 @@ button:hover {
     line-height: 1;
 }
 
+.header img {
+    margin-right: 0.5rem;
+}
+
 h1 {
     margin: 0;
 }
