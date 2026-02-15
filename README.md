@@ -2,7 +2,7 @@
 InstaFlip is an experimental application solo-developed for Zach Henderson Library of Georgia Southern University. The application is a full-stack interface for any faculty/staff to manage patron's "flips". A "flip" is an action a patron can do where they can renew a laptop with no questions asked. A patron is allowed to "flip" 2 times a semester.
 
 ## Platforms
-[![My Skills](https://skillicons.dev/icons?i=windows,apple,linux)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=windows,apple)](https://skillicons.dev)
 
 ## Programming Languages and Frameworks
 [![My Skills](https://skillicons.dev/icons?i=react,typescript,css,go,npm,sqlite)](https://skillicons.dev)

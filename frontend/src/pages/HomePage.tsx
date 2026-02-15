@@ -167,7 +167,7 @@ export function HomePage() {
                                 )}
                             </div>
                         </div>
-
+                        
                         <div className='container button-row'>
                             {currentFlips.length < settings.maxFlips && (
                                 <div className='colorful-card'>
