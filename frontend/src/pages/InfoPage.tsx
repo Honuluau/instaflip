@@ -3,6 +3,10 @@ export function InfoPage() {
         <div className="container no-top-margin flex-col justify-start">
             <h1 className="page-header">Info</h1>
             <div className="info-section">
+                <h2>About</h2>
+                <p>InstaFlip is a policy at Zach Henderson Library to speed up the process of renewing a laptop. Typically, a patron who wants to return and checkout another laptop will recieve a seperate laptop. If there are no laptops available, the patron would have to wait for a staff member to process the laptop.</p>
+            </div>
+            <div className="info-section">
                 <h2>Workflow</h2>
                 <div className="info-list">
                     <p>1. Navigate to HOME page by clicking the house icon on the left.</p>

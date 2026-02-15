@@ -41,9 +41,7 @@ export function Sidebar({ currentPage, onPageChange}: SidebarProps) {
                 >
                     <BugOff size={iconSize}/>
                 </button>
-            </div>
 
-            <div className="section bottom">
                 {/*Info*/}
                 <button
                     onClick={() => onPageChange("info")}
