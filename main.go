@@ -17,7 +17,7 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:     "instaflip",
+		Title:     "InstaFlip",
 		Width:     1024,
 		Height:    768,
 		Frameless: true,
