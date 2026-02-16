@@ -1,14 +1,19 @@
+import { ReactElement } from "react"
+
 interface overlayProps {
+    icon: ReactElement,
     label: string,
     text: string
 }
 
-export function Overlay({label, text}: overlayProps) {
+export function Overlay({icon, label, text}: overlayProps) {
     return (
         <div className="overlay">
             <div className="overlay-box">
-                <h2>// WARNING</h2>
-                <h3>{label}</h3>
+                <div className="overlay-row">
+                    {icon}
+                    <h2>{label}</h2>
+                </div>
                 <p>{text}</p>
             </div>
         </div>

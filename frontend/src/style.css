@@ -792,3 +792,14 @@ span .primary {
     font-family: "Inter";
 }
 
+.overlay-row {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.overlay-row h2 {
+    padding: 0;
+    margin: 0;
+}
