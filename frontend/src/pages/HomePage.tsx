@@ -1,15 +1,16 @@
-import { Repeat, User, X } from "lucide-react";
+import { Calendar, ClockAlert, Repeat, User, WarehouseIcon, X } from "lucide-react";
 import { CanFlipBanner, MaximumFlipsReachedBanner } from "../components/Banners";
 import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
 import { useEffect, useState } from "react";
 
-import { CheckFlipsDB, DeleteFlip, FlipPatronDB } from "../../wailsjs/go/main/App";
+import { CheckFlipsDB, CheckVersion, DeleteFlip, FlipPatronDB } from "../../wailsjs/go/main/App";
 import { backend } from "../../wailsjs/go/models";
 import { logger } from "../lib/logger";
 import { getSettings, type Settings as SettingsType } from "../lib/settings";
 import { Overlay } from "../components/Overlay";
 import { toaster } from "../lib/toaster";
+import { version } from "../App";
 
 export function HomePage() {
     const [settings, setSettings] = useState<SettingsType>(getSettings());
@@ -19,6 +20,7 @@ export function HomePage() {
     const [otherFlips, setOtherFlips] = useState<backend.FlipRowItem[]>([]);
     const [checked, setChecked] = useState(Boolean);
     const [outOfDate, setOutOfDate] = useState(Boolean);
+    const [releaseVersion, setReleaseVersion] = useState<string>(version);
 
     const checkPatron = async () => {
         try {
@@ -104,16 +106,32 @@ export function HomePage() {
         }
     }
 
+    const checkVersion = async () => {
+        let response = await CheckVersion();
+        if (response != "") { // "" is default for no response e.g no wifi or failed response.
+            setReleaseVersion(response)
+        }
+    }
+
     useEffect(() => {
         setSettings(settings);
         checkSettingsOutOfDate();
+        console.log(checkVersion())
     }, [])
 
     return (
         <>
             {outOfDate? (
                 <>
-                    <Overlay label="Semester Range is out of date." text="Please change the semester settings by clicking the calendar button on the left-side of this window. The semester range is derived from Academic Calendars. Academic Calendars are available through the Office of the Registrar on Georgia Southern's website."/>
+                    <Overlay icon={<Calendar size={400}/>} label="Semester Range is out of date." text="Please change the semester settings by clicking the calendar button on the left-side of this window. The semester range is derived from Academic Calendars. Academic Calendars are available through the Office of the Registrar on Georgia Southern's website."/>
+                </>
+            ): (
+                <></>
+            )}
+
+            {(version != releaseVersion)? (
+                <>
+                    <Overlay icon={<ClockAlert/>} label="Outdated Version" text={`InstaFlip is currently on version ${releaseVersion}. This machine's version is on ${version}. Please update InstaFlip via GitHub.`}/>
                 </>
             ): (
                 <></>

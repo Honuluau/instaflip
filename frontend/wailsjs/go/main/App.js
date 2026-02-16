@@ -6,6 +6,10 @@ export function CheckFlipsDB(arg1) {
   return window['go']['main']['App']['CheckFlipsDB'](arg1);
 }
 
+export function CheckVersion() {
+  return window['go']['main']['App']['CheckVersion']();
+}
+
 export function DeleteFlip(arg1, arg2) {
   return window['go']['main']['App']['DeleteFlip'](arg1, arg2);
 }

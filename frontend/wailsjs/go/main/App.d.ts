@@ -4,6 +4,8 @@ import {backend} from '../models';
 
 export function CheckFlipsDB(arg1:string):Promise<Array<backend.FlipRowItem>>;
 
+export function CheckVersion():Promise<string>;
+
 export function DeleteFlip(arg1:string,arg2:number):Promise<boolean>;
 
 export function ExportStatistics(arg1:number,arg2:number,arg3:string):Promise<boolean>;

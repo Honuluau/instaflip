@@ -61,3 +61,8 @@ func (a *App) DeleteFlip(eagleID string, date int64) (bool, error) {
 func (a *App) SaveLogs(logs string) error {
 	return backend.SaveLogs(logs)
 }
+
+// Check Version
+func (a *App) CheckVersion() (string, error) {
+	return backend.CheckVersion()
+}
