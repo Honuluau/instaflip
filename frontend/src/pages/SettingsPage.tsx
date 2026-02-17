@@ -11,6 +11,7 @@ export function SettingsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
     const [tempSettings, setTempSettings] = useState<SettingsType>(savedSettings);
     const [difference, setDifference] = useState<Boolean>(false);
+    const [disableChecked, setDisabledCheck] = useState<boolean>(savedSettings.disabled);
 
     const onSave = () => {
         // Log Differences
@@ -101,6 +102,7 @@ export function SettingsPage() {
 
     const disableInstaFlipForFinals = (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
+            setDisabledCheck(e.target.checked);
             const updated = { ...tempSettings, disabled: e.target.checked }
             setTempSettings(updated);
             checkDifference(updated);
@@ -151,7 +153,7 @@ export function SettingsPage() {
                         <h4>Disable InstaFlip for Finals</h4>
                         <span>* Use with permission.</span>
                     </div>
-                    <Switch onChange={disableInstaFlipForFinals} />
+                    <Switch onChange={disableInstaFlipForFinals} checked={disableChecked} />
                 </div>
             </div>
             <div>
