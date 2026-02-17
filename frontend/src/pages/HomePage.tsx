@@ -1,4 +1,4 @@
-import { Calendar, ClockAlert, Repeat, User, WarehouseIcon, X } from "lucide-react";
+import { Ban, Calendar, ClockAlert, Repeat, User, WarehouseIcon, X } from "lucide-react";
 import { CanFlipBanner, MaximumFlipsReachedBanner } from "../components/Banners";
 import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
@@ -121,21 +121,30 @@ export function HomePage() {
 
     return (
         <>
-            {outOfDate? (
+            {outOfDate ? (
                 <>
-                    <Overlay icon={<Calendar/>} label="Semester Range is out of date." text="Please change the semester settings by clicking the calendar button on the left-side of this window. The semester range is derived from Academic Calendars. Academic Calendars are available through the Office of the Registrar on Georgia Southern's website."/>
+                    <Overlay icon={<Calendar />} label="Semester Range is out of date." text="Please change the semester settings by clicking the calendar button on the left-side of this window. The semester range is derived from Academic Calendars. Academic Calendars are available through the Office of the Registrar on Georgia Southern's website." />
                 </>
-            ): (
+            ) : (
                 <></>
             )}
 
-            {(version != releaseVersion)? (
+            {(version != releaseVersion) ? (
                 <>
-                    <Overlay icon={<ClockAlert/>} label="Outdated Version" text={`InstaFlip is currently on version ${releaseVersion}. This machine's version is on ${version}. Please update InstaFlip via GitHub.`}/>
+                    <Overlay icon={<ClockAlert />} label="Outdated Version" text={`InstaFlip is currently on version ${releaseVersion}. This machine's version is on ${version}. Please update InstaFlip via GitHub.`} />
                 </>
-            ): (
+            ) : (
                 <></>
             )}
+
+            {(settings.disabled) ? (
+                <>
+                    <Overlay icon={<Ban />} label="Disabled for Finals" text="InstaFlip is currently disabled for Finals week. Please do not undo this action without permission." />
+                </>
+            ) : (
+                <></>
+            )
+            }
 
             <div className="pageContainer">
                 <Header />
@@ -179,13 +188,13 @@ export function HomePage() {
                                 ) : (
                                     <>
                                         {currentFlips?.map((flip: backend.FlipRowItem, i) => (
-                                            <FlipInstance key={i} id={i} date={flip.FlipTime} deleteFlip={deleteFlip}/>
+                                            <FlipInstance key={i} id={i} date={flip.FlipTime} deleteFlip={deleteFlip} />
                                         ))}
                                     </>
                                 )}
                             </div>
                         </div>
-                        
+
                         <div className='container button-row'>
                             {currentFlips.length < settings.maxFlips && (
                                 <div className='colorful-card'>
@@ -212,7 +221,7 @@ export function HomePage() {
                                     ) : (
                                         <>
                                             {otherFlips?.map((flip: backend.FlipRowItem, i) => (
-                                                <FlipInstance key={i} id={i} date={flip.FlipTime} deleteFlip={deleteFlip}/>
+                                                <FlipInstance key={i} id={i} date={flip.FlipTime} deleteFlip={deleteFlip} />
                                             ))}
                                         </>
                                     )}

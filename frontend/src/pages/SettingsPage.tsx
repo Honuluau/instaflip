@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { logger } from "../lib/logger";
 import { SelectFolder } from "../../wailsjs/go/main/App";
 import { toaster } from "../lib/toaster";
+import { Switch } from "../components/Switch";
 
 export function SettingsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
@@ -98,6 +99,17 @@ export function SettingsPage() {
         }
     }
 
+    const disableInstaFlipForFinals = (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const updated = { ...tempSettings, disabled: e.target.checked }
+            setTempSettings(updated);
+            checkDifference(updated);
+        } catch (error) {
+            console.error("Error disabling instaflip for finals:", error)
+            logger.error("Error Disable InstaFlipForFinals")
+        }
+    }
+
     useEffect(() => {
 
     }, [difference])
@@ -131,6 +143,15 @@ export function SettingsPage() {
                             <span>Browse</span>
                         </button>
                     </div>
+                </div>
+            </div>
+            <div className="semester-date-settings">
+                <div className="flex-row settings-toggle">
+                    <div className="flex-col">
+                        <h4>Disable InstaFlip for Finals</h4>
+                        <span>* Use with permission.</span>
+                    </div>
+                    <Switch onChange={disableInstaFlipForFinals} />
                 </div>
             </div>
             <div>
