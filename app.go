@@ -40,6 +40,11 @@ func (a *App) CheckFlipsDB(eagle_id string) (flips []backend.FlipRowItem, err er
 	return backend.CheckFlips(eagle_id)
 }
 
+// Decline Patron
+func (a *App) DeclinePatronDB(eagleID string) error {
+	return backend.DeclinePatron(eagleID)
+}
+
 // Select Folder
 func (a *App) SelectFolder(defaultPath string) (string, error) {
 	return backend.SelectFolderDialog(a.ctx, defaultPath)

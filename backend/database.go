@@ -62,6 +62,18 @@ func InitDB() error {
 		return err
 	}
 
+	// Create declines table.
+	_, err = db.Exec(`
+		CREATE TABLE IF NOT EXISTS declines (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			eagle_id TEXT NOT NULL,
+			decline_time INTEGER
+		);
+	`)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -85,6 +97,24 @@ func FlipPatron(eagleID string) error {
 		INSERT INTO flips (eagle_id, flip_time)
 		VALUES (?, ?)
 	`, eagleID, time.Now().UnixMilli())
+
+	return err
+}
+
+// Decline patorn by adding a decline instance to the database.
+func DeclinePatron(eagleID string) error {
+	if db == nil {
+		if err := InitDB(); err != nil {
+			return nil
+		}
+	}
+
+	_, err := db.Exec(`
+		INSERT INTO declines (eagle_id, decline_time)
+		VALUES (?, ?)
+	`, eagleID, time.Now().UnixMilli())
+
+	fmt.Println("Declined:" + eagleID)
 
 	return err
 }

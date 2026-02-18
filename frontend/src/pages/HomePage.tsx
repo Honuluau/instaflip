@@ -4,7 +4,7 @@ import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
 import { useEffect, useState } from "react";
 
-import { CheckFlipsDB, CheckVersion, DeleteFlip, FlipPatronDB } from "../../wailsjs/go/main/App";
+import { CheckFlipsDB, CheckVersion, DeclinePatronDB, DeleteFlip, FlipPatronDB } from "../../wailsjs/go/main/App";
 import { backend } from "../../wailsjs/go/models";
 import { logger } from "../lib/logger";
 import { getSettings, type Settings as SettingsType } from "../lib/settings";
@@ -113,6 +113,20 @@ export function HomePage() {
         }
     }
 
+    const declinePatron = () => {
+        try {
+            DeclinePatronDB(eagleId)
+            cancelFlip()
+
+            logger.success(`Declined ${eagleId}.`)
+            toaster.addToast('SUCCESS', `Declined ${eagleId}`, 3000);
+        } catch (err) {
+            logger.error(`Failed to decline ${eagleId}.`)
+            console.error(`Failed to decline ${eagleId}. Err:`, err)
+            toaster.addToast('ERROR', `Failed to decline ${eagleId}`, 3000);
+        }
+    }
+
     useEffect(() => {
         setSettings(settings);
         checkSettingsOutOfDate();
@@ -212,7 +226,7 @@ export function HomePage() {
                             ) : (
                                 <>
                                     <div className="colorful-card decline">
-                                        <button className="flip-btn decline">
+                                        <button className="flip-btn decline" onClick={declinePatron}>
                                             <Ban size={20} />
                                             <span>Decline</span>
                                         </button>
