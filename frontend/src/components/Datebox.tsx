@@ -29,7 +29,7 @@ export function Datebox({ date, update }: DateboxProps) {
 
     return (
         <>
-            <button className="date-box" onClick={() => setOpen(true)}>
+            <button className="date-box" onClick={() => setOpen(!open)}>
                 <span>{selectedDate?.toLocaleString('en-us', {'month': 'short', day: 'numeric', year: 'numeric'})}</span>
                 <CalendarFold size={20} strokeWidth={2} />
             </button>

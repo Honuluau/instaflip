@@ -490,6 +490,9 @@ h1.page-header {
     padding-bottom: 8px;
     margin-top: 8px;
     box-shadow: 0px 0px 2px var(--border);
+    position: absolute;
+    background-color: white;
+    z-index: 99;
 
     font-family: inherit;
     font-weight: 500;
