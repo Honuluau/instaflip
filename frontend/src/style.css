@@ -16,6 +16,8 @@ body {
     --sb-font-weight: 500;
     --sb-font-size: 1rem;
 
+    --decline-color: #FF1053;
+
     padding: 0px;
     font-family: "Inter";
     font-size: 0.8rem;
@@ -252,13 +254,12 @@ input::placeholder {
 }
 
 .ineligible {
-    --error: #f2666b;
     --error2: rgba(92, 18, 18, 0.9);
 
-    background-color: var(--error);
+    background-color: var(--decline-color);
     border: 1px solid var(--error2);
     box-shadow: 0px 0px 3px var(--error);
-    color: var(--error2);
+    color: white;
 }
 
 .eligible {
@@ -713,10 +714,9 @@ span .primary {
 }
 
 .error-toast {
-    --error: #f2666b;
     --error2: rgba(92, 18, 18, 0.9);
 
-    background-color: var(--error);
+    background-color: var(--decline-color);
     border-radius: var(--radius);
     border: 1px solid var(--error2);
     color: var(--error2)
@@ -751,11 +751,8 @@ span .primary {
 }
 
 .dropdown .delete-btn:hover {
-    --error: #f2666b;
-    --error2: rgba(92, 18, 18, 0.9);
-
-    background-color: var(--error);
-    color: var(--error2);
+    background-color: var(--decline-color);
+    color: white;
 }
 
 .justify-between {
@@ -877,4 +874,19 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.flip-btn.decline {
+    background-color: var(--decline-color);
+    border: 1px solid rgba(92, 18, 18, 0.9);
+    color: white;
+    gap: 0.25rem;
+}
+
+.flip-btn.decline:hover {
+    background-color: #ff5988;
+}
+
+.colorful-card.decline::after, .colorful-card.decline::before {
+    background-image: conic-gradient(from var(--angle), rgb(255, 255, 255), var(--decline-color));
 }

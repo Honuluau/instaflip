@@ -1,4 +1,4 @@
-import { Ban, Calendar, ClockAlert, Repeat, User, WarehouseIcon, X } from "lucide-react";
+import { Ban, Calendar, ClockAlert, Octagon, Repeat, StopCircle, User, WarehouseIcon, X } from "lucide-react";
 import { CanFlipBanner, MaximumFlipsReachedBanner } from "../components/Banners";
 import { FlipInstance } from "../components/FlipInstance";
 import { Header } from "../components/Header";
@@ -196,18 +196,29 @@ export function HomePage() {
                         </div>
 
                         <div className='container button-row'>
-                            {currentFlips.length < settings.maxFlips && (
-                                <div className='colorful-card'>
-                                    <button className='flip-btn' onClick={flipPatron}>
-                                        <Repeat size={20} />
-                                        <span>Flip Patron</span>
+                            {(currentFlips.length < settings.maxFlips) ? (
+                                <>
+                                    <div className='colorful-card'>
+                                        <button className='flip-btn' onClick={flipPatron}>
+                                            <Repeat size={20} />
+                                            <span>Flip Patron</span>
+                                        </button>
+                                    </div>
+                                    <button className='flip-btn cancel' onClick={cancelFlip}>
+                                        <X size={20} />
+                                        <span>Cancel</span>
                                     </button>
-                                </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="colorful-card decline">
+                                        <button className="flip-btn decline">
+                                            <Ban size={20} />
+                                            <span>Decline</span>
+                                        </button>
+                                    </div>
+                                </>
                             )}
-                            <button className='flip-btn cancel' onClick={cancelFlip}>
-                                <X size={20} />
-                                <span>Cancel</span>
-                            </button>
                         </div>
 
                         {otherFlips.length > 0 && (
