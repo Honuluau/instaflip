@@ -34,7 +34,9 @@ export function Dropdown({ options }: DropdownProps) {
                                 {(option == selectedOption) ? (
                                     <>
                                         <Check size={16} />
-                                    </>) : (<></>)}
+                                    </>) : (<>
+                                        <Check size={16} opacity={0}/>
+                                    </>)}
                             </button>
                         ))}
                     </div>

@@ -935,8 +935,9 @@ input:checked+.slider:before {
     align-items: center;
     position: absolute;
     top: 100%;
-    width: 100%;
+    width: max-content;
     left: 0;
+    padding: 4px;
 }
 
 .dropdown-list button {
@@ -945,4 +946,5 @@ input:checked+.slider:before {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    gap: 1rem;
 }
