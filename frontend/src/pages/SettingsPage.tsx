@@ -148,12 +148,14 @@ export function SettingsPage() {
                 </div>
             </div>
             <div className="semester-date-settings">
-                <div className="flex-row settings-toggle">
-                    <div className="flex-col">
-                        <h4>Disable InstaFlip for Finals</h4>
-                        <span>* Use with permission.</span>
+                <div className="flex-col">
+                    <div className="flex-row settings-toggle">
+                        <div className="flex-col">
+                            <h4>Disable InstaFlip for Finals</h4>
+                        </div>
+                        <Switch onChange={disableInstaFlipForFinals} checked={disableChecked} />
                     </div>
-                    <Switch onChange={disableInstaFlipForFinals} checked={disableChecked} />
+                    <span>* Use with permission.</span>
                 </div>
             </div>
             <div>
