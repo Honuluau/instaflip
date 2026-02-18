@@ -12,6 +12,8 @@ export function StatisticsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
     const [exportStart, setExportStart] = useState<number>(savedSettings.semesterStart);
     const [exportEnd, setExportEnd] = useState<number>(savedSettings.semesterEnd);
+    const [exportFlips, setExportFlips] = useState<boolean>(true);
+    const [exportDeclines, setExportDeclines] = useState<boolean>(false);
 
     const handleExportStart = (epochNum: number) => {
         setExportStart(epochNum)
@@ -31,6 +33,14 @@ export function StatisticsPage() {
         }
     }
 
+    const handleExportFlips = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setExportFlips(e.target.checked);
+    }
+
+    const handleExportDeclines = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setExportDeclines(e.target.checked);
+    }
+
     return (
         <div className="container no-top-margin flex-col justify-start">
             <h1 className="page-header">Statistics</h1>
@@ -40,12 +50,12 @@ export function StatisticsPage() {
                     <div className="flex-row statistic-switch">
                         <Repeat size={20} />
                         <h4>Flips</h4>
-                        <Switch />
+                        <Switch onChange={handleExportFlips} checked={exportFlips}/>
                     </div>
                     <div className="flex-row statistic-switch">
                         <Ban />
                         <h4>Declines</h4>
-                        <Switch />
+                        <Switch onChange={handleExportDeclines} checked={exportDeclines}/>
                     </div>
                 </div>
             </div>

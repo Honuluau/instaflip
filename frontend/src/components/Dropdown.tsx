@@ -1,5 +1,5 @@
 import { Check, ChevronDown, Download } from "lucide-react";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface DropdownProps {
     options: string[]
@@ -25,23 +25,22 @@ export function Dropdown({ options }: DropdownProps) {
                 <span>{selectedOption}</span>
                 <ChevronDown size={20} />
 
-                {(showDropdown) ? (<></>) : (
-                <>
-                    <div className="dropdown-list">
-                        {options.map((option, index) => (
-                            <button key={index} onClick={() => handleSelect(option)}>
-                                <span>{option}</span>
-                                {(option == selectedOption) ? (
-                                    <>
-                                        <Check size={16} />
-                                    </>) : (<>
-                                        <Check size={16} opacity={0}/>
-                                    </>)}
-                            </button>
-                        ))}
-                    </div>
-                </>
-            )}
+                {(showDropdown) ? (
+                    <>
+                        <div className="dropdown-list">
+                            {options.map((option, index) => (
+                                <button key={index} onClick={() => handleSelect(option)}>
+                                    <span>{option}</span>
+                                    {(option == selectedOption) ? (
+                                        <>
+                                            <Check size={16} />
+                                        </>) : (<>
+                                            <Check size={16} opacity={0} />
+                                        </>)}
+                                </button>
+                            ))}
+                        </div>
+                    </>) : (<></>)}
             </button>
         </>
     )
