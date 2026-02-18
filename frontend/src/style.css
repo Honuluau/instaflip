@@ -101,7 +101,7 @@ button:hover {
     margin-top: 1.5rem;
 }
 
-.header h1{
+.header h1 {
     font-size: 3rem;
     line-height: 1;
 }
@@ -304,13 +304,14 @@ input::placeholder {
     position: relative;
 }
 
-@property --angle{
+@property --angle {
     syntax: "<angle>";
     initial-value: 0deg;
     inherits: false;
 }
 
-.colorful-card::after, .colorful-card::before {
+.colorful-card::after,
+.colorful-card::before {
     border-radius: var(--radius);
     content: '';
     position: absolute;
@@ -330,7 +331,7 @@ input::placeholder {
     opacity: 0.5;
 }
 
-@keyframes spin{
+@keyframes spin {
     from {
         --angle: 0deg;
     }
@@ -393,7 +394,7 @@ input::placeholder {
     height: 30px;
 }
 
-.semesters-header{
+.semesters-header {
     display: inline-flex;
     align-items: center;
     width: 100%;
@@ -460,14 +461,14 @@ button.date-box {
     padding-top: 8px;
     padding-bottom: 8px;
     box-shadow: 0px 0px 2px var(--border);
-    
-    font-family: inherit; 
+
+    font-family: inherit;
     font-weight: 500;
     font-size: var(--sb-font-size);
 }
 
 h1.page-header {
-    margin-bottom: 1cm;
+    margin-bottom: 0.5cm;
 }
 
 .no-margin {
@@ -489,8 +490,8 @@ h1.page-header {
     padding-bottom: 8px;
     margin-top: 8px;
     box-shadow: 0px 0px 2px var(--border);
-    
-    font-family: inherit; 
+
+    font-family: inherit;
     font-weight: 500;
     font-size: var(--sb-font-size);
 }
@@ -693,7 +694,7 @@ span .primary {
     padding: 10px;
     width: fit-content;
     gap: 0.5rem;
-    
+
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -777,7 +778,7 @@ span .primary {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
+
     transform: translateX(20px);
 }
 
@@ -814,66 +815,66 @@ span .primary {
 
 /* The switch - the box around the slider */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 24px;
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
 }
 
 /* Hide default HTML checkbox */
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 /* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 2px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 100px;
-  transition: .3s;
-  box-shadow: 0 0 3px var(--border);
+    position: absolute;
+    cursor: pointer;
+    top: 2px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 100px;
+    transition: .3s;
+    box-shadow: 0 0 3px var(--border);
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  transition: .3s;
-  border-radius: 50%;
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
 }
 
-input:checked + .slider {
-  background-color: var(--accent1);
+input:checked+.slider {
+    background-color: var(--accent1);
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 3px var(--accent1);
+input:focus+.slider {
+    box-shadow: 0 0 3px var(--accent1);
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(18px);
-  -ms-transform: translateX(18px);
-  transform: translateX(18px);
+input:checked+.slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .flip-btn.decline {
@@ -887,6 +888,56 @@ input:checked + .slider:before {
     background-color: #ff5988;
 }
 
-.colorful-card.decline::after, .colorful-card.decline::before {
+.colorful-card.decline::after,
+.colorful-card.decline::before {
     background-image: conic-gradient(from var(--angle), rgb(255, 255, 255), var(--decline-color));
+}
+
+.statistic-switch {
+    display: inline-flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.statistic-switch h4 {
+    margin: 0;
+
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.dropdown-button {
+    display: inline-flex;
+    flex-direction: row;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 3px var(--border);
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dropdown-button span {
+    font-size: var(--sb-font-size);
+    font-weight: var(--sb-font-weight);
+    color: black;
+}
+
+.dropdown-list {
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-top: 1rem;
+    box-shadow: 0 0 3px var(--border);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown-list button {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
