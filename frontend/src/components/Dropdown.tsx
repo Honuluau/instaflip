@@ -24,8 +24,8 @@ export function Dropdown({ options }: DropdownProps) {
                 <Download size={20} />
                 <span>{selectedOption}</span>
                 <ChevronDown size={20} />
-            </button>
-            {(showDropdown) ? (<></>) : (
+
+                {(showDropdown) ? (<></>) : (
                 <>
                     <div className="dropdown-list">
                         {options.map((option, index) => (
@@ -40,6 +40,7 @@ export function Dropdown({ options }: DropdownProps) {
                     </div>
                 </>
             )}
+            </button>
         </>
     )
 }

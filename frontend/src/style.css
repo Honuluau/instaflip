@@ -915,6 +915,7 @@ input:checked+.slider:before {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    position: relative;
 }
 
 .dropdown-button span {
@@ -932,6 +933,10 @@ input:checked+.slider:before {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    left: 0;
 }
 
 .dropdown-list button {
