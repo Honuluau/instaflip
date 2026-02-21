@@ -15,13 +15,13 @@ import (
 type FlipRow struct {
 	ID       int64  `"json:id"`
 	EagleID  string `"json:eagle_id"`
-	FlipTime int64  `"json:flip_time"`
+	FlipTime int64  `"json:process_time"`
 }
 
 type FlipRowItem struct {
 	ID       int64  `"json:id"`
 	EagleID  string `"json:eagle_id"`
-	FlipTime int64  `"json:flip_time"`
+	FlipTime int64  `"json:process_time"`
 }
 
 var db *sql.DB
@@ -50,12 +50,16 @@ func InitDB() error {
 		return err
 	}
 
+	// v1.2 changes the name of flip_time & decline_time to process_time
+	_, err = db.Exec(`ALTER TABLE flips RENAME COLUMN flip_time TO process_time`)
+	_, err = db.Exec(`ALTER TABLE declines RENAME COLUMN decline_time TO process_time`)
+
 	// Create flips table.
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS flips (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			eagle_id TEXT NOT NULL,
-			flip_time INTEGER
+			process_time INTEGER
 		);
 	`)
 	if err != nil {
@@ -67,7 +71,7 @@ func InitDB() error {
 		CREATE TABLE IF NOT EXISTS declines (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			eagle_id TEXT NOT NULL,
-			decline_time INTEGER
+			process_time INTEGER
 		);
 	`)
 	if err != nil {
@@ -94,7 +98,7 @@ func FlipPatron(eagleID string) error {
 	}
 
 	_, err := db.Exec(`
-		INSERT INTO flips (eagle_id, flip_time)
+		INSERT INTO flips (eagle_id, process_time)
 		VALUES (?, ?)
 	`, eagleID, time.Now().UnixMilli())
 
@@ -110,7 +114,7 @@ func DeclinePatron(eagleID string) error {
 	}
 
 	_, err := db.Exec(`
-		INSERT INTO declines (eagle_id, decline_time)
+		INSERT INTO declines (eagle_id, process_time)
 		VALUES (?, ?)
 	`, eagleID, time.Now().UnixMilli())
 
@@ -154,6 +158,36 @@ func CheckFlips(eagleID string) (flips []FlipRowItem, err error) {
 	return flips, err
 }
 
+func GetRowsOfTable(startEpoch, endEpoch, int64, tables []string) (map[string][]string, error) {
+	rowsMap := make(map[string][]string)
+
+	for _, table := range tables {
+		rows, err := db.Query(`
+			SELECT * FROM ?
+			WHERE process_time >= ? and process_time
+			// make function that gets rows.
+		`)
+		if err != nil {
+			return nil, err
+		}
+
+		var tableRows []string
+		for rows.Next() {
+			var row string
+			err := rows.Scan(&row)
+			if err != nil {
+				return nil, err
+			}
+			tableRows = append(tableRows, row)
+		}
+
+		rowsMap[table] = tableRows
+		rows.Close()
+	}
+
+	return rowsMap, nil
+}
+
 // Get data with epoch range.
 func ExportRange(start int64, end int64, path string) (bool, error) {
 	if db == nil {
@@ -165,7 +199,7 @@ func ExportRange(start int64, end int64, path string) (bool, error) {
 	rows, err := db.Query(`
 		SELECT *
 		FROM flips
-		WHERE flip_time >= ? AND flip_time <= ?
+		WHERE process_time >= ? AND process_time <= ?
 	`, start, end)
 	if err != nil {
 		return false, err
@@ -183,7 +217,7 @@ func ExportRange(start int64, end int64, path string) (bool, error) {
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
-	writer.Write([]string{"id", "eagle_id", "flip_time"})
+	writer.Write([]string{"id", "eagle_id", "process_time"})
 
 	for rows.Next() {
 		var flip FlipRowItem
@@ -215,7 +249,7 @@ func DeleteFlip(eagleID string, date int64) (bool, error) {
 
 	_, err := db.Exec(`
 	DELETE FROM flips
-	WHERE eagle_id = ? AND flip_time = ?
+	WHERE eagle_id = ? AND process_time = ?
 	`, eagleID, date)
 
 	if err != nil {
