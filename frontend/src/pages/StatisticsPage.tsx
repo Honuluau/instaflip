@@ -8,12 +8,22 @@ import { toaster } from "../lib/toaster";
 import { Switch } from "../components/Switch";
 import { Dropdown } from "../components/Dropdown";
 
+export const EXPORT_STYLES = [
+    "Unix Milliseconds",
+    "Datetime",
+    "Year, Month, & Timestamp"
+]
+
+export type ExportStyle = (typeof EXPORT_STYLES)[number];
+
 export function StatisticsPage() {
     const [savedSettings, setSavedSettings] = useState<SettingsType>(getSettings());
+
     const [exportStart, setExportStart] = useState<number>(savedSettings.semesterStart);
     const [exportEnd, setExportEnd] = useState<number>(savedSettings.semesterEnd);
     const [exportFlips, setExportFlips] = useState<boolean>(true);
     const [exportDeclines, setExportDeclines] = useState<boolean>(false);
+    const [exportStyle, setExportStyle] = useState<ExportStyle>("Unix Milliseconds");
 
     const handleExportStart = (epochNum: number) => {
         setExportStart(epochNum)
@@ -63,7 +73,7 @@ export function StatisticsPage() {
             <div className="flex-row">
                 <div className="flex-col">
                     <h2>Export Style</h2>
-                    <Dropdown options={["Unix Milliseconds", "Datetime", "Year, Month, & Timestamp"]} />
+                    <Dropdown options={EXPORT_STYLES} setOption={setExportStyle} />
                 </div>
             </div>
 

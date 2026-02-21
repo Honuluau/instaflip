@@ -2,15 +2,17 @@ import { Check, ChevronDown, Download } from "lucide-react";
 import { useEffect, useState } from "react"
 
 interface DropdownProps {
-    options: string[]
+    options: string[],
+    setOption: Function
 }
 
-export function Dropdown({ options }: DropdownProps) {
+export function Dropdown({ options, setOption }: DropdownProps) {
     const [showDropdown, setShowDropdown] = useState<Boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string>(options[0]);
 
     const handleSelect = (newOption: string) => {
         setSelectedOption(newOption);
+        setOption(newOption);
         console.log(newOption);
     }
 
