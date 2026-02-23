@@ -13,7 +13,6 @@ export function Dropdown({ options, setOption }: DropdownProps) {
     const handleSelect = (newOption: string) => {
         setSelectedOption(newOption);
         setOption(newOption);
-        console.log(newOption);
     }
 
     const handleShow = () => {

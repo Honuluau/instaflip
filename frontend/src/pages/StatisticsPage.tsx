@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Datebox } from "../components/Datebox";
 import { getSettings, Settings as SettingsType } from "../lib/settings";
-import { Ban, Bell, Download, Repeat } from "lucide-react";
+import { Ban, Bell, Download, Repeat, Sheet } from "lucide-react";
 import { ExportStatistics } from "../../wailsjs/go/main/App";
 import { logger } from "../lib/logger";
 import { toaster } from "../lib/toaster";
@@ -33,13 +33,28 @@ export function StatisticsPage() {
         setExportEnd(epochNum)
     }
 
-    const onExport = async () => {
-        const exported = await ExportStatistics(exportStart, exportEnd, savedSettings.statisticsOutputPath)
+    const getTables = () => {
+        let tables = [];
+
+        if (exportFlips) {
+            tables.push("flips")
+        }
+
+        if (exportDeclines) {
+            tables.push("declines")
+        }
+
+        return tables
+    }
+
+    const onExport = async (fileType: string) => {
+        const exported = await ExportStatistics(exportStart, exportEnd, savedSettings.statisticsOutputPath, exportStyle, fileType, getTables());
+        
         if (exported) {
             logger.success(`Exported Data from ${exportStart} -> ${exportEnd} to "${savedSettings.statisticsOutputPath}"`)
             toaster.addToast("SUCCESS", "Successfuly exported!", 3000);
         } else {
-            toaster.addToast("ERROR", "Failed to download data.", 300);
+            toaster.addToast("ERROR", "Failed to download data.", 3000);
         }
     }
 
@@ -60,12 +75,12 @@ export function StatisticsPage() {
                     <div className="flex-row statistic-switch">
                         <Repeat size={20} />
                         <h4>Flips</h4>
-                        <Switch onChange={handleExportFlips} checked={exportFlips}/>
+                        <Switch onChange={handleExportFlips} checked={exportFlips} />
                     </div>
                     <div className="flex-row statistic-switch">
                         <Ban />
                         <h4>Declines</h4>
-                        <Switch onChange={handleExportDeclines} checked={exportDeclines}/>
+                        <Switch onChange={handleExportDeclines} checked={exportDeclines} />
                     </div>
                 </div>
             </div>
@@ -73,7 +88,7 @@ export function StatisticsPage() {
             <div className="flex-row">
                 <div className="flex-col">
                     <h2>Export Style</h2>
-                    <Dropdown options={EXPORT_STYLES} setOption={setExportStyle} />
+                    <Dropdown options={EXPORT_STYLES} setOption={(style: string) => setExportStyle(style as ExportStyle)} />
                 </div>
             </div>
 
@@ -89,12 +104,20 @@ export function StatisticsPage() {
                         <Datebox date={new Date(savedSettings.semesterEnd)} update={handleExportEnd} />
                     </div>
                 </div>
-                <div>
-                    <button className="accent check-btn no-margin" onClick={onExport}>
-                        <Download size={20} />
-                        <span>Export .csv</span>
-                    </button>
-                </div>
+                {(exportFlips || exportDeclines) && (
+                    <div style={{ gap: "0.5rem", display: "flex" }}>
+                        {!(exportFlips && exportDeclines) && (
+                            <button className="accent check-btn no-margin" onClick={() => onExport("csv")}>
+                                <Download size={20} />
+                                <span>Export .csv</span>
+                            </button>
+                        )}
+                        <button className="accent check-btn no-margin" onClick={() => onExport("xlsx")} style={{ backgroundColor: "#107c41" }}>
+                            <Sheet size={20} />
+                            <span>Export .xlsx</span>
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     )

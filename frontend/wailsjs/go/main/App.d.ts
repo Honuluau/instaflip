@@ -10,7 +10,7 @@ export function DeclinePatronDB(arg1:string):Promise<void>;
 
 export function DeleteFlip(arg1:string,arg2:number):Promise<boolean>;
 
-export function ExportStatistics(arg1:number,arg2:number,arg3:string):Promise<boolean>;
+export function ExportStatistics(arg1:number,arg2:number,arg3:string,arg4:string,arg5:string,arg6:Array<string>):Promise<boolean>;
 
 export function FlipPatronDB(arg1:string):Promise<void>;
 

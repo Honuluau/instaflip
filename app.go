@@ -51,8 +51,8 @@ func (a *App) SelectFolder(defaultPath string) (string, error) {
 }
 
 // On Export
-func (a *App) ExportStatistics(startEpoch, endEpoch int64, path string) (bool, error) {
-	success, err := backend.Export(startEpoch, endEpoch, path)
+func (a *App) ExportStatistics(startEpoch, endEpoch int64, path, style, fileType string, tables []string) (bool, error) {
+	success, err := backend.Export(startEpoch, endEpoch, path, style, fileType, tables)
 	return success, err
 }
 

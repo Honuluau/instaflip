@@ -158,26 +158,24 @@ func CheckFlips(eagleID string) (flips []FlipRowItem, err error) {
 	return flips, err
 }
 
-func GetRowsOfTable(startEpoch, endEpoch, int64, tables []string) (map[string][]string, error) {
-	rowsMap := make(map[string][]string)
+func GetRowsOfTable(startEpoch, endEpoch int64, tables []string) (map[string][]FlipRowItem, error) {
+	rowsMap := make(map[string][]FlipRowItem)
 
 	for _, table := range tables {
-		rows, err := db.Query(`
-			SELECT * FROM ?
-			WHERE process_time >= ? and process_time
-			// make function that gets rows.
-		`)
+		query := fmt.Sprintf("SELECT * FROM %s WHERE process_time >= ? AND process_time <= ?", table)
+		rows, err := db.Query(query, startEpoch, endEpoch)
 		if err != nil {
 			return nil, err
 		}
 
-		var tableRows []string
+		var tableRows []FlipRowItem
 		for rows.Next() {
-			var row string
-			err := rows.Scan(&row)
+			var row FlipRowItem
+			err := rows.Scan(&row.ID, &row.EagleID, &row.FlipTime)
 			if err != nil {
 				return nil, err
 			}
+
 			tableRows = append(tableRows, row)
 		}
 
