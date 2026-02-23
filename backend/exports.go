@@ -149,7 +149,7 @@ func WriteDatetimeXLSX(table string, rows []FlipRowItem, f *excelize.File) error
 	return nil
 }
 
-func WriteYearMonthTimestamp(table string, rows []FlipRowItem, f *excelize.File) error {
+func WriteYearMonthTimestampXLSX(table string, rows []FlipRowItem, f *excelize.File) error {
 	err := CreateNewSheetOrOverwriteExisting(table, f)
 	if err != nil {
 		fmt.Println(err)
@@ -208,7 +208,7 @@ func ExportXLSX(startEpoch, endEpoch int64, path, style string, tables []string)
 		}
 	case "Year, Month, & Timestamp":
 		for _, table := range tables {
-			WriteYearMonthTimestamp(table, rows[table], f)
+			WriteYearMonthTimestampXLSX(table, rows[table], f)
 		}
 	}
 
@@ -266,6 +266,25 @@ func WriteDatetimeCSV(file *os.File, rows []FlipRowItem, table string) {
 	}
 }
 
+func WriteYearMonthTimestampCSV(file *os.File, rows []FlipRowItem, table string) {
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+
+	writer.Write([]string{"InstaFlip Id", "Eagle Id", "Year", "Month", "Timestamp (" + table + ")"})
+
+	for _, row := range rows {
+		t := time.UnixMilli(row.FlipTime)
+
+		writer.Write([]string{
+			strconv.FormatInt(row.ID, 10),
+			row.EagleID,
+			strconv.Itoa(t.Year()),
+			t.Month().String(),
+			ConvertUnixMillisecondsToTimestamp(row.FlipTime),
+		})
+	}
+}
+
 func ExportCSV(startEpoch, endEpoch int64, path, style, table string) {
 	tables := []string{table}
 	rows, err := GetRowsOfTable(startEpoch, endEpoch, tables)
@@ -286,7 +305,11 @@ func ExportCSV(startEpoch, endEpoch int64, path, style, table string) {
 		WriteUnixMillisecondsCSV(file, rows[table], table)
 	case "Datetime":
 		WriteDatetimeCSV(file, rows[table], table)
+	case "Year, Month, & Timestamp":
+		WriteYearMonthTimestampCSV(file, rows[table], table)
 	}
+
+	return
 }
 
 func Export(startEpoch, endEpoch int64, path, style, fileType string, tables []string) (bool, error) {
