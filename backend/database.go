@@ -2,11 +2,9 @@ package backend
 
 import (
 	"database/sql"
-	"encoding/csv"
 	"fmt"
 	"os"
 	"path/filepath"
-	"strconv"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -184,58 +182,6 @@ func GetRowsOfTable(startEpoch, endEpoch int64, tables []string) (map[string][]F
 	}
 
 	return rowsMap, nil
-}
-
-// Get data with epoch range.
-func ExportRange(start int64, end int64, path string) (bool, error) {
-	if db == nil {
-		if err := InitDB(); err != nil {
-			return false, err
-		}
-	}
-
-	rows, err := db.Query(`
-		SELECT *
-		FROM flips
-		WHERE process_time >= ? AND process_time <= ?
-	`, start, end)
-	if err != nil {
-		return false, err
-	}
-	defer rows.Close()
-
-	now := time.Now().Format("2006-01-02_15-04-05")
-	fullPath := filepath.Join(path, "instaflip-export_"+now+".csv")
-	file, err := os.Create(fullPath)
-	if err != nil {
-		return false, err
-	}
-	defer file.Close()
-
-	writer := csv.NewWriter(file)
-	defer writer.Flush()
-
-	writer.Write([]string{"id", "eagle_id", "process_time"})
-
-	for rows.Next() {
-		var flip FlipRowItem
-
-		if err := rows.Scan(&flip.ID, &flip.EagleID, &flip.FlipTime); err != nil {
-			return false, err
-		}
-
-		writer.Write([]string{
-			strconv.FormatInt(flip.ID, 10),
-			flip.EagleID,
-			strconv.FormatInt(flip.FlipTime, 10),
-		})
-	}
-
-	if err := rows.Err(); err != nil {
-		return false, err
-	}
-
-	return true, nil
 }
 
 func DeleteFlip(eagleID string, date int64) (bool, error) {

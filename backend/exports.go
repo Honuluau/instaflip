@@ -308,8 +308,6 @@ func ExportCSV(startEpoch, endEpoch int64, path, style, table string) {
 	case "Year, Month, & Timestamp":
 		WriteYearMonthTimestampCSV(file, rows[table], table)
 	}
-
-	return
 }
 
 func Export(startEpoch, endEpoch int64, path, style, fileType string, tables []string) (bool, error) {
